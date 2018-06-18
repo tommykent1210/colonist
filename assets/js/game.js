@@ -134,7 +134,7 @@ var Game = function() {
 		house: { type: "house", cost: {wood: 20, stone: 25}, capacity: 6, workers: 0, generates: {} },
 		woodshack: { type: "production", cost: {wood: 5, stone: 15}, capacity: 0, workers: 2, generates: {wood: 2} },
 		farm: { type: "production", cost: {wood: 20, stone: 10}, capacity: 0, workers: 4, generates: {food: 2} },
-		ironmine: { type: "production", cost: {wood: 15, stone: 5}, capacity: 0, workers: 3, generates: {ironore: 0.25, stone: 0.5} },
+		ironmine: { type: "production", cost: {wood: 15, stone: 5}, capacity: 0, workers: 3, generates: {ironore: 0.25, stone: 1} },
 		charcoalkiln: { type: "refining", cost: {wood: 20, stone: 15}, capacity: 0, workers: 2, generates: {wood: -1, charcoal: 0.5} },
 		ironforge: { type: "refining", cost: {wood: 10, stone: 35}, capacity: 0, workers: 3, generates: {ironore: -0.5, charcoal: -0.5, iron: 0.25} },
 		toolery: { type: "refining", cost: {wood: 150, stone: 50, iron: 20}, capacity: 0, workers: 3, generates: {iron: -0.5, tools: 0.25} },
@@ -747,6 +747,10 @@ var Game = function() {
 
 		// if the research exists!
 		if(Research.hasOwnProperty(task)) {
+			if(Data.research[task] == 1) {
+				// already researched
+				return false;
+			}
 			var affordable = true;
 			for (var i = Object.keys(Research[task].cost).length - 1; i >= 0; i--) {
 				var resource = Object.keys(Research[task].cost)[i];
@@ -809,10 +813,14 @@ var Game = function() {
 				
 			};
 
-			if(affordable == false) {
-				$('.btn.research[data-task="'+researchName+'"]').prop('disabled', true).addClass('disabled').addClass('btn-success');
+			if(affordable == false || Data.research[researchName] == 1) {
+				$('.btn.research[data-task="'+researchName+'"]').prop('disabled', true).addClass('disabled');
+				if(Data.research[researchName] == 1) {
+					$('.btn.research[data-task="'+researchName+'"]').addClass('btn-success');
+				}
 			} else {
 				$('.btn.research[data-task="'+researchName+'"]').prop('disabled', false).removeClass('disabled');
+
 			}
 
 		};

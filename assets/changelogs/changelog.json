@@ -16,6 +16,7 @@
 			"Changed how resources are registered to allow for the marketplace"
 		],
 		"fixed": [
+			"Fixed duplication of research 'completed' message when clicking on a research item that has already been done"
 		],
 		"removed": []
 
