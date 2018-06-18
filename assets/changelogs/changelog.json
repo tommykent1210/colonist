@@ -14,7 +14,8 @@
 			"Removed the 'begin' button as the game autostarts",
 			"Hidden research for buildings until the building is actually researched",
 			"Completed research is now in green, not light blue, to reduce confusion",
-			"Changed how resources are registered to allow for the marketplace"
+			"Changed how resources are registered to allow for the marketplace",
+			"Reduced stone yield from mines (1 -> 0.5)"
 		],
 		"fixed": [
 			"Fixed duplication of research 'completed' message when clicking on a research item that has already been done",
