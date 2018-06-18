@@ -11,9 +11,12 @@
 		"changed": [
 			"Altered starting house number to prevent food decay at max population with no workers",
 			"Removed the 'begin' button as the game autostarts",
-			"Hidden research for buildings until the building is actually researched"
+			"Hidden research for buildings until the building is actually researched",
+			"Completed research is now in green, not light blue, to reduce confusion",
+			"Changed how resources are registered to allow for the marketplace"
 		],
-		"fixed": [],
+		"fixed": [
+		],
 		"removed": []
 
 	},

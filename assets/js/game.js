@@ -353,7 +353,7 @@ var Game = function() {
 			addResource('stone', 50);
 			addResource('food', 100);
 
-			addResource('food', 10000);
+			/*addResource('food', 10000);
 			addResource('iron', 10000);
 			addResource('gold', 10000);
 			addResource('coins', 10000);
@@ -362,7 +362,7 @@ var Game = function() {
 			addResource('ironore', 10000);
 			addResource('goldore', 10000);
 			addResource('charcoal', 10000);
-			addResource('tools', 10000);
+			addResource('tools', 10000);*/
 
 
 			recalculateBonuses();
