@@ -4,11 +4,14 @@
 		"date": "18th June 2018",
 		"added": [
 			"Changelogs to the main screen",
-			"Version number to the header"
+			"Version number to the header",
+			"Level 2 building mechanics",
+			"Added marketplace research & the beginnings of the marketplace"
 		],
 		"changed": [
 			"Altered starting house number to prevent food decay at max population with no workers",
-			"Removed the 'begin' button as the game autostarts"
+			"Removed the 'begin' button as the game autostarts",
+			"Hidden research for buildings until the building is actually researched"
 		],
 		"fixed": [],
 		"removed": []

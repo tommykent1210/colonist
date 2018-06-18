@@ -40,7 +40,7 @@ $( document ).ready(function() {
     	var task = $(this).data('task');
     	if(gameInstance.doResearch(task)) {
 
-    		$(this).prop('disabled', true).addClass('disabled').removeClass('btn-primary').addClass('btn-info');
+    		$(this).prop('disabled', true).addClass('disabled').removeClass('btn-primary').addClass('btn-success');
     	}
     });
 
@@ -141,9 +141,71 @@ var Game = function() {
 		lab: { type: "science", cost: {wood: 150, stone: 100, tools: 20}, capacity: 0, workers: 3, generates: {tools: -0.15, science: 0.5} },
 		goldmine: { type: "production", cost: {wood: 150, stone: 100, tools: 20}, capacity: 0, workers: 4, generates: {tools: -0.1, goldore: 0.2} },
 		goldforge: { type: "refining", cost: {wood: 350, stone: 200, tools: 50}, capacity: 0, workers: 3, generates: {tools: -0.15, goldore: -0.2, gold: 0.1} },
+		mint: { type: "refining", cost: {wood: 350, stone: 200, tools: 50, gold: 20}, capacity: 0, workers: 3, generates: {gold: -0.1, coins: 0.2} },
+
+		// level 2 buildings
+		mill: { type: "production", cost: {wood: 650, stone: 500, tools: 50}, capacity: 0, workers: 4, generates: {tools: -0.25, food: 2} },
 	};
 
-	var Resources = ["science", "wood", "stone", "food", "ironore", "iron", "tools", "charcoal", "goldore", "gold"];
+	//var Resources = ["science", "wood", "stone", "food", "ironore", "iron", "tools", "charcoal", "goldore", "gold", "coins"];
+
+	var Resources = {
+		"science": {
+			title: "Science",
+			market: false,
+			baseValue: 0
+		}, 
+		"wood": {
+			title: "Wood",
+			market: true,
+			baseValue: 10
+		}, 
+		"stone": {
+			title: "Stone",
+			market: true,
+			baseValue: 10
+		},
+		"food": {
+			title: "Food",
+			market: true,
+			baseValue: 20
+		}, 
+		"ironore": {
+			title: "Iron Ore",
+			market: true,
+			baseValue: 50
+		},
+		"iron": {
+			title: "Iron",
+			market: true,
+			baseValue: 100
+		},
+		"tools": {
+			title: "Tools",
+			market: true,
+			baseValue: 150
+		},
+		"charcoal": {
+			title: "Charcoal",
+			market: true,
+			baseValue: 10
+		},
+		"goldore": {
+			title: "Gold Ore",
+			market: true,
+			baseValue: 150
+		},
+		"gold": {
+			title: "Gold",
+			market: true,
+			baseValue: 300
+		},
+		"coins": {
+			title: "Coins",
+			market: false,
+			baseValue: 0
+		}
+	};
 
 	var Research = {
 		reducedfood: { title: 'Reduced Food Cost Level 1 (-10%)', cost: { science: 100, food: 250}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
@@ -196,6 +258,13 @@ var Game = function() {
 		scientificresearch: { title: 'Unlock Scientific Research', cost: { iron: 50, charcoal: 100}, bonuses: {} },
 		goldmining: { title: 'Unlock Gold Mining', cost: { iron: 50, charcoal: 100, tools: 100}, bonuses: {} },
 		goldsmelting: { title: 'Unlock Gold Forging', cost: { charcoal: 100, goldore: 100, tools: 100}, bonuses: {} },
+		coinminting: { title: 'Unlock Coin Minting', cost: { gold: 100, tools: 100}, bonuses: {} },
+		marketplace: { title: 'Unlock Marketplace', cost: { coins: 1000, stone: 500}, bonuses: {} },
+		milling: { title: 'Unlock Mill', cost: { iron: 500, food: 1000, wood: 1000, coins: 500}, bonuses: {} },
+		
+
+
+		buildinglevel2: { title: 'Unlock Level 2 Buildings', cost: { iron: 1000, gold: 1000, tools: 1000, coins: 1000}, bonuses: {} },
 		
 	};
 
@@ -261,11 +330,11 @@ var Game = function() {
 				test: 0
 			}
 
-			for (var i = Resources.length - 1; i >= 0; i--) {
-				Data.resources[Resources[i]] = 0;
-				Data.production[Resources[i]] = 0;
-				BaseBonuses.production[Resources[i]] = 1;
-				ResourcesUnlocked[Resources[i]] = 0;
+			for (var i = Object.keys(Resources).length - 1; i >= 0; i--) {
+				Data.resources[Object.keys(Resources)[i]] = 0;
+				Data.production[Object.keys(Resources)[i]] = 0;
+				BaseBonuses.production[Object.keys(Resources)[i]] = 1;
+				ResourcesUnlocked[Object.keys(Resources)[i]] = 0;
 			};
 
 
@@ -284,7 +353,20 @@ var Game = function() {
 			addResource('stone', 50);
 			addResource('food', 100);
 
+			addResource('food', 10000);
+			addResource('iron', 10000);
+			addResource('gold', 10000);
+			addResource('coins', 10000);
+			addResource('wood', 10000);
+			addResource('stone', 10000);
+			addResource('ironore', 10000);
+			addResource('goldore', 10000);
+			addResource('charcoal', 10000);
+			addResource('tools', 10000);
+
+
 			recalculateBonuses();
+			generateMarketplaceList();
 		}
 
 		$('.resourceListRow').hide();
@@ -702,7 +784,7 @@ var Game = function() {
 			var buttonText = researchObj.title + ': ';
 
 			for (var j = Object.keys(researchObj.cost).length - 1; j >= 0; j--) {
-				var costText = '<img class="resource-icon" src="assets/img/resources/'+Object.keys(researchObj.cost)[j]+'.png"/> x' + researchObj.cost[Object.keys(researchObj.cost)[j]] + "&nbsp;";
+				var costText = '<img class="resource-icon" src="assets/img/resources/'+Object.keys(researchObj.cost)[j]+'.png" data-toggle="tooltip" data-placement="top" title="'+ Object.keys(researchObj.cost)[j] +'"/> x' + researchObj.cost[Object.keys(researchObj.cost)[j]] + "&nbsp;";
 				buttonText += costText;
 			};
 
@@ -820,6 +902,22 @@ var Game = function() {
 				}
 			};
 		}
+	}
+
+
+	// marketplace
+	
+	// generate all the marketplace buttons
+	function generateMarketplaceList() {
+		for (var i = Object.keys(Resources).length - 1; i >= 0; i--) {
+			var res = Object.keys(Resources)[i];
+
+			if(Resources[res].market == true) {
+
+
+				var string = '<div class="row marketplace-row"><div class="col-md-3">'+Resources[res].title+'</div> <div class="col-md-9"> <button class="btn btn-primary" data-item="'+res+'" data-amount="1" data-action="buy">+1</button> <button class="btn btn-primary" data-item="'+res+'" data-amount="10" data-action="buy">+10</button> <button class="btn btn-primary" data-item="'+res+'" data-amount="100" data-action="buy">+100</button> <button class="btn btn-danger" data-item="'+res+'" data-amount="1" data-action="sell">-1</button> <button class="btn btn-danger" data-item="'+res+'" data-amount="10" data-action="sell">-10</button> <button class="btn btn-danger" data-item="'+res+'" data-amount="100" data-action="sell">-100</button> </div> </div>'; $('.marketplace-body').append(string);
+			}
+		};
 	}
 
 
