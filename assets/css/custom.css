@@ -1,0 +1,103 @@
+body {
+	/*font-family: 'PT Sans', sans-serif;*/
+
+	font-family: 'Cutive Mono', monospace;
+	background-color: #5a5a5a;
+}
+
+.margin-top {
+	margin-top: 40px;
+}
+
+.text-center {
+	text-align: center;
+}
+
+
+/* box stuff */
+.box {
+	margin: 10px;
+}
+
+.box .header {
+	background-color: #999;
+	text-align: center;
+	color: #fff;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.box .body, .tab-box .body {
+	background-color: #ddd; 
+	padding: 10px;
+}
+
+.box .body .btn, .tab-box .body .btn {
+	margin-top: 5px;
+}
+
+.box .message-body {
+	height: 300px;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.box .btn.btn-primary.disabled, .tab-box .btn.btn-primary.disabled {
+	background-color: #888;
+	border-color: #666;
+}
+
+.nav-tabs .nav-link {
+    background: #999;
+    margin: 1px 1px;
+	color: #fff;
+}
+
+.card {
+    margin-top: 10px;
+}
+
+.card-subtitle {
+	text-align: center;
+	font-style: italic;
+	margin-bottom: 5px;
+	font-size: 0.9em;
+}
+
+.card-resources {
+	margin-bottom: 1px;
+	font-size: 0.8em;
+}
+
+.card-resources img {
+	width: 16px;
+	height: auto;
+}
+
+
+span.cost, span.production-text {
+	text-align: center;
+	display: block;
+}
+
+ul.messages, ul.resources-list {
+	list-style: none;
+	margin-left: -10px;
+}
+
+.table-resources th, .table-resources td,.table-buildings th, .table-buildings td {
+	padding: 0;
+
+font-family: 'Cutive Mono', monospace;
+}
+
+
+.btn-fullwidth {
+	width: 100%;
+	display: block;
+}
+
+.btn-halfwidth {
+	width: 48%;
+	display: inline-block;
+}

@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../favicon.ico">
+
+  <title>Colonist Game</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./assets/css/custom.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cutive+Mono|PT+Sans" rel="stylesheet">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Colonist</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Changelog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-info begin ">Start</a>
+        </li>
+          <!--<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>-->
+        </ul>
+
+      </div>
+    </nav>
+
+    <main role="main" class="container">
+
+      <div class="row margin-top">
+        <div class="col-md-4">
+          <div class="box">
+            <div class="header">
+              Resources
+            </div>
+            <div class="body">
+              <table class="table table-borderless table-resources">
+                <!--<thead>
+                  <tr>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                  </tr>
+                </thead>-->
+                <tbody>
+                  <tr>
+                    <th scope="row">Colonists:</th>
+                    <td><span class="data colonists">0/0</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Required Workers:</th>
+                    <td><span class="data requiredWorkers">0</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Fertility</th>
+                    <td><span class="data fertility">0</span>%</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Productivity</th>
+                    <td><span class="data productivity">100</span>%</td>
+                    <td></td>
+                  </tr>
+                  <tr class="resourceListRow" data-resource="food">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/food.png"/> Food:</th>
+                    <td><span class="resource food">0</span></td>
+                    <td><span class="production food">0.0/t</span></td>
+                  </tr>
+                  <tr class="resourceListRow" data-resource="wood">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/wood.png"/> Wood:</th>
+                    <td><span class="resource wood">0</span></td>
+                    <td><span class="production wood">0.0/t</span></td>
+                  </tr>
+                  <tr class="resourceListRow" data-resource="stone">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/stone.png"/> Stone:</th>
+                    <td><span class="resource stone">0</span></td>
+                    <td><span class="production stone">0.0/t</span></td>
+                  </tr>
+                  <tr class="resourceListRow" data-resource="ironore">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/ironore.png"/> Iron Ore:</th>
+                    <td><span class="resource ironore">0</span></td>
+                    <td><span class="production ironore">0.0/t</span></td>
+                  </tr>
+                  <tr class="resourceListRow" data-resource="iron">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/iron.png"/> Iron:</th>
+                    <td><span class="resource iron">0</span></td>
+                    <td><span class="production iron">0.0/t</span></td>
+                  </tr>
+                  <tr class="resourceListRow" data-resource="charcoal">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/charcoal.png"/> Charcoal:</th>
+                    <td><span class="resource charcoal">0</span></td>
+                    <td><span class="production charcoal">0.0/t</span></td>
+                  </tr>
+                  <tr class="resourceListRow" data-resource="tools">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/tools.png"/> Tools:</th>
+                    <td><span class="resource tools">0</span></td>
+                    <td><span class="production tools">0.0/t</span></td>
+                  </tr>
+
+                  <tr class="resourceListRow" data-resource="science">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/science.png"/> Science:</th>
+                    <td><span class="resource science">0</span></td>
+                    <td><span class="production science">0.0/t</span></td>
+                  </tr>
+                  
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+
+          <div class="box">
+            <div class="header">
+              Buildings
+            </div>
+            <div class="body">
+              <table class="table table-borderless table-buildings">
+                <tbody>
+                  <tr>
+                    <th scope="row">House:</th>
+                    <td><span class="data building" data-building="house">0</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Wood Shack:</th>
+                    <td><span class="data building" data-building="woodshack">0</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Farm:</th>
+                    <td><span class="data building" data-building="farm">0</span></td>
+                  </tr>
+                   <tr class="research-hidden" data-research="charcoalsmelting">
+                    <th scope="row">Charcoal Kiln:</th>
+                    <td><span class="data building" data-building="charcoalkiln">0</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Iron Mine:</th>
+                    <td><span class="data building" data-building="ironmine">0</span></td>
+                  </tr>
+                  <tr class="research-hidden" data-research="ironsmelting">
+                    <th scope="row">Iron Forge:</th>
+                    <td><span class="data building" data-building="ironforge">0</span></td>
+                  </tr>
+                  <tr class="research-hidden" data-research="goldmining">
+                    <th scope="row">Gold Mine:</th>
+                    <td><span class="data building" data-building="goldmine">0</span></td>
+                  </tr>
+                  <tr class="research-hidden" data-research="goldsmelting">
+                    <th scope="row">Gold Forge:</th>
+                    <td><span class="data building" data-building="goldforge">0</span></td>
+                  </tr>
+                  <tr class="research-hidden" data-research="toolmaking">
+                    <th scope="row">Toolery:</th>
+                    <td><span class="data building" data-building="toolery">0</span></td>
+                  </tr>
+                  <tr class="research-hidden" data-research="scientificresearch">
+                    <th scope="row">Lab:</th>
+                    <td><span class="data building" data-building="lab">0</span></td>
+                  </tr>
+
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+        <div class="box bonusesBox">
+            <div class="header">
+              Bonuses
+            </div>
+            <div class="body">
+              <h4>Global</h4>
+              <table class="table table-borderless table-resources">
+                <!--<thead>
+                  <tr>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                  </tr>
+                </thead>-->
+                <tbody>
+                  <tr class="bonusRow" data-bonus="globalbonus.foodConsumptionRate">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/food.png"/> Food Consumption:</th>
+                    <td><span class="bonus" data-bonus="globalbonus.foodConsumptionRate">+0%</span></td>
+                  </tr>
+                  
+                  
+
+                </tbody>
+              </table>
+
+              <h4>Production</h4>
+              <table class="table table-borderless table-resources">
+                <!--<thead>
+                  <tr>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                  </tr>
+                </thead>-->
+                <tbody>
+                  <tr class="bonusRow" data-bonus="production.food">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/food.png"/> Food:</th>
+                    <td><span class="bonus" data-bonus="production.food">+0%</span></td>
+                  </tr>
+                  <tr class="bonusRow" data-bonus="production.wood">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/wood.png"/> Wood:</th>
+                    <td><span class="bonus" data-bonus="production.wood">+0%</span></td>
+                  </tr>
+                  <tr class="bonusRow" data-bonus="production.stone">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/stone.png"/> Stone:</th>
+                    <td><span class="bonus" data-bonus="production.stone">+0%</span></td>
+                  </tr>
+                  <tr class="bonusRow" data-bonus="production.ironore">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/ironore.png"/> Iron Ore:</th>
+                    <td><span class="bonus" data-bonus="production.ironore">+0%</span></td>
+                  </tr>
+                  <tr class="bonusRow" data-bonus="production.iron">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/iron.png"/> Iron:</th>
+                    <td><span class="bonus" data-bonus="production.iron">+0%</span></td>
+                  </tr>
+                  <tr class="bonusRow" data-bonus="production.charcoal">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/charcoal.png"/> Charcoal:</th>
+                    <td><span class="bonus" data-bonus="production.charcoal">+0%</span></td>
+                  </tr>
+                  <tr class="bonusRow" data-bonus="production.tools">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/tools.png"/> Tools:</th>
+                    <td><span class="bonus" data-bonus="production.tools">+0%</span></td>
+                  </tr>
+
+                  <tr class="bonusRow" data-bonus="production.science">
+                    <th scope="row"><img class="resource-icon" src="assets/img/resources/tools.png"/> Science:</th>
+                    <td><span class="bonus" data-bonus="production.science">+0%</span></td>
+                  </tr>
+                  
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          <!-- START: messages -->
+          <div class="box">
+            <div class="header">
+              Messages
+            </div>
+            <div class="body message-body">
+              <ul class="messages">
+
+              </ul>
+            </div>
+          </div>
+          <!-- END: messages -->
+
+
+          <!-- tabbable area -->
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="building-tab" data-toggle="tab" href="#buildings" role="tab" aria-controls="buildings" aria-selected="true">Buildings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="research-tab" data-toggle="tab" href="#research" role="tab" aria-controls="research" aria-selected="false">Research</a>
+            </li>
+            <!--<li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+            </li>-->
+          </ul>
+          <div class="tab-content" id="tabContent">
+            <div class="tab-pane fade show active" id="buildings" role="tabpanel" aria-labelledby="building-tab">
+              <!-- START: buildings -->
+              <div class="tab-box">
+                <div class="body">
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-center">House</h5>
+                          <p class="card-subtitle">Provides housing for 6 colonists</p>
+                          <p class="card-text card-resources"><span class="cost" data-building="house"></span></p>
+                          <p class="card-text card-resources"><span class="production-text" data-building="house">&nbsp;</span></p>
+                          <button class="btn btn-primary purchase btn-halfwidth" data-building="house" data-amount="1">Buy 1</button>
+                          <button class="btn btn-danger destroy btn-halfwidth" data-building="house" data-amount="1">Destroy 1</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-center">Woodshack</h5>
+                          <p class="card-subtitle">Lumberjacks generate wood here</p>
+                          <p class="card-text card-resources"><span class="cost" data-building="woodshack"></span></p>
+                          <p class="card-text card-resources"><span class="production-text" data-building="woodshack">&nbsp;</span></p>
+                          <button class="btn btn-primary purchase btn-halfwidth" data-building="woodshack" data-amount="1">Buy 1</button>
+                          <button class="btn btn-danger destroy btn-halfwidth" data-building="woodshack" data-amount="1">Destroy 1</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-center">Farm</h5>
+                          <p class="card-subtitle">Farms provide basic food</p>
+                          <p class="card-text card-resources"><span class="cost" data-building="farm"></span></p>
+                          <p class="card-text card-resources"><span class="production-text" data-building="farm">&nbsp;</span></p>
+                          <button class="btn btn-primary purchase btn-halfwidth" data-building="farm" data-amount="1">Buy 1</button>
+                          <button class="btn btn-danger destroy btn-halfwidth" data-building="farm" data-amount="1">Destroy 1</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-center">Iron Mine</h5>
+                          <p class="card-subtitle">Mines provide ores and stone</p>
+                          <p class="card-text card-resources"><span class="cost" data-building="ironmine"></span></p>
+                          <p class="card-text card-resources"><span class="production-text" data-building="ironmine">&nbsp;</span></p>
+                          <button class="btn btn-primary purchase btn-halfwidth" data-building="ironmine" data-amount="1">Buy 1</button>
+                          <button class="btn btn-danger destroy btn-halfwidth" data-building="ironmine" data-amount="1">Destroy 1</button>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-6 research-hidden" data-research="goldmine">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-center">Gold Mine</h5>
+                          <p class="card-subtitle">Mine gold ore from gold rich veins</p>
+                          <p class="card-text card-resources"><span class="cost" data-building="goldmine"></span></p>
+                          <p class="card-text card-resources"><span class="production-text" data-building="goldmine">&nbsp;</span></p>
+                          <button class="btn btn-primary purchase btn-halfwidth" data-building="goldmine" data-amount="1">Buy 1</button>
+                          <button class="btn btn-danger destroy btn-halfwidth" data-building="goldmine" data-amount="1">Destroy 1</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 research-hidden" data-research="charcoalsmelting">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-center">Charcoal Kiln</h5>
+                          <p class="card-subtitle">Turns wood to charcoal</p>
+                          <p class="card-text card-resources"><span class="cost" data-building="charcoalkiln"></span></p>
+                          <p class="card-text card-resources"><span class="production-text" data-building="charcoalkiln">&nbsp;</span></p>
+                          <button class="btn btn-primary purchase btn-halfwidth" data-building="charcoalkiln" data-amount="1">Buy 1</button>
+                          <button class="btn btn-danger destroy btn-halfwidth" data-building="charcoalkiln" data-amount="1">Destroy 1</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 research-hidden" data-research="ironsmelting">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-center">Iron Forge</h5>
+                          <p class="card-subtitle">Refines iron ore into iron ingots</p>
+                          <p class="card-text card-resources"><span class="cost" data-building="ironforge"></span></p>
+                          <p class="card-text card-resources"><span class="production-text" data-building="ironforge">&nbsp;</span></p>
+                          <button class="btn btn-primary purchase btn-halfwidth" data-building="ironforge" data-amount="1">Buy 1</button>
+                          <button class="btn btn-danger destroy btn-halfwidth" data-building="ironforge" data-amount="1">Destroy 1</button>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-6 research-hidden" data-research="goldsmelting">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-center">Gold Forge</h5>
+                          <p class="card-subtitle">Refines gold ore into gold ingots</p>
+                          <p class="card-text card-resources"><span class="cost" data-building="goldforge"></span></p>
+                          <p class="card-text card-resources"><span class="production-text" data-building="goldforge">&nbsp;</span></p>
+                          <button class="btn btn-primary purchase btn-halfwidth" data-building="goldforge" data-amount="1">Buy 1</button>
+                          <button class="btn btn-danger destroy btn-halfwidth" data-building="goldforge" data-amount="1">Destroy 1</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 research-hidden" data-research="toolmaking">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-center">Toolery</h5>
+                          <p class="card-subtitle">Turns iron into tools</p>
+                          <p class="card-text card-resources"><span class="cost" data-building="toolery"></span></p>
+                          <p class="card-text card-resources"><span class="production-text" data-building="toolery">&nbsp;</span></p>
+                          <button class="btn btn-primary purchase btn-halfwidth" data-building="toolery" data-amount="1">Buy 1</button>
+                          <button class="btn btn-danger destroy btn-halfwidth" data-building="toolery" data-amount="1">Destroy 1</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 research-hidden" data-research="scientificresearch">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-center">Lab</h5>
+                          <p class="card-subtitle">Progress your colony!</p>
+                          <p class="card-text card-resources"><span class="cost" data-building="lab"></span></p>
+                          <p class="card-text card-resources"><span class="production-text" data-building="lab">&nbsp;</span></p>
+                          <button class="btn btn-primary purchase btn-halfwidth" data-building="lab" data-amount="1">Buy 1</button>
+                          <button class="btn btn-danger destroy btn-halfwidth" data-building="lab" data-amount="1">Destroy 1</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+                </div>
+              </div>
+              <!-- END: buildings -->
+
+            </div>
+            <div class="tab-pane fade" id="research" role="tabpanel" aria-labelledby="research-tab">
+              <div class="tab-box">
+                <div class="body">
+
+                  <div class="row">
+                    <div class="col-md-12">
+
+                      <h5>Buildings & Items</h5>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="goldmining"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="charcoalsmelting"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="ironsmelting"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="goldsmelting"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="toolmaking"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="scientificresearch"><span class="research-description"></span></button>
+                      
+
+                      <h5 class="margin-top">Global Bonuses</h5>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="reducedfood"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="reducedfood2"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="reducedfood3"><span class="research-description"></span></button>
+                      <h5 class="margin-top">Production Bonuses</h5>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="foodproduction1"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="foodproduction2"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="foodproduction3"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="woodcutting1"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="woodcutting2"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="woodcutting3"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="stonecutting1"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="stonecutting2"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="stonecutting3"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="ironmining1"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="ironmining2"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="ironmining3"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="ironrefining1"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="ironrefining2"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="ironrefining3"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="charcoal1"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="charcoal2"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="charcoal3"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="tooling1"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="tooling2"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="tooling3"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="researching1"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="researching2"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="researching3"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="goldmining1"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="goldmining2"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="goldmining3"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="goldrefining1"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="goldrefining2"><span class="research-description"></span></button>
+                      <button class="btn btn-primary btn-fullwidth research" data-task="goldrefining3"><span class="research-description"></span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+          </div>
+          
+
+
+        </div>
+
+      </div>
+
+    </main><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/js/game.js"></script>
+  </body>
+  </html>
