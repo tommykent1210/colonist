@@ -2,7 +2,7 @@ $( document ).ready(function() {
 	console.log( "ready!" );
 
 	var gameInstance = new Game();
-
+	var version = 'v0.1.1 ';
 
     //  hide all researchables
     $('.research-hidden').hide();
@@ -50,7 +50,7 @@ $( document ).ready(function() {
 
     $.get('assets/revision', function(data) {
     	console.log(data);
-    	$('span.revision').text("&nbsp;-"+data.substring(3,8));
+    	$('span.revision').text(version + " - "+data.substring(3,8));
     });
 
     jQuery.getJSON( "assets/changelogs/changelog.json", function( data ) {
