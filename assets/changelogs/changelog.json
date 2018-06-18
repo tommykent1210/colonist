@@ -3,7 +3,8 @@
 		"version":"0.1.1",
 		"date": "18th June 2018",
 		"added": [
-			"Changelogs to the main screen"
+			"Changelogs to the main screen",
+			"Version number to the header"
 		],
 		"changed": [
 			"Altered starting house number to prevent food decay at max population with no workers"
