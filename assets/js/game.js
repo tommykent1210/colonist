@@ -7,9 +7,9 @@ $( document ).ready(function() {
     //  hide all researchables
     $('.research-hidden').hide();
 
-    $('.begin').on('click', function() {
+    $('.reset').on('click', function() {
     	console.log('game started');
-    	gameInstance.beginGame();
+    	gameInstance.resetGame();
     });
 
     // get any action button
@@ -884,6 +884,11 @@ var Game = function() {
 
 	function resetGame() {
 		console.log('reset!');
+
+		clearInterval(update);
+		clearInterval(redraw);
+
+		beginGame();
 	}
 
 	function numberFormat (labelValue) {

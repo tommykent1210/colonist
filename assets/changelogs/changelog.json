@@ -7,7 +7,8 @@
 			"Version number to the header"
 		],
 		"changed": [
-			"Altered starting house number to prevent food decay at max population with no workers"
+			"Altered starting house number to prevent food decay at max population with no workers",
+			"Removed the 'begin' button as the game autostarts"
 		],
 		"fixed": [],
 		"removed": []
