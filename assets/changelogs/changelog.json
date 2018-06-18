@@ -1,0 +1,32 @@
+[
+	{
+		"version":"0.1.1",
+		"date": "18th June 2018",
+		"added": [
+			"Changelogs to the main screen"
+		],
+		"changed": [
+			"Altered starting house number to prevent food decay at max population with no workers"
+		],
+		"fixed": [],
+		"removed": []
+
+	},
+
+	{
+		"version":"0.1.0",
+		"date": "17th June 2018",
+		"added": [
+			"Base game mechanics",
+			"Basic buildings: house, wood shack, farm, mine, charcoal kiln, iron forge, gold mine, gold forge, toolery, science lab",
+			"Added research and research dependent buildings",
+			"Colony growth, and shrinkage through birth/migration and death",
+			"Added global bonuses and production bonuses as a consequence of research",
+			"Implemented productivity that sits at 100% as long as worker requirement is satisfied"
+		],
+		"changed": [],
+		"fixed": [],
+		"removed": []
+
+	}
+]

@@ -101,3 +101,23 @@ font-family: 'Cutive Mono', monospace;
 	width: 48%;
 	display: inline-block;
 }
+
+.changelog-version {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.changelog-date {
+    font-size: 1.1em;
+    font-style: italic;
+}
+
+.changelog-type {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.changelog-list {
+	text-align: justify;
+}

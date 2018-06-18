@@ -1,7 +1,7 @@
 $( document ).ready(function() {
-    console.log( "ready!" );
+	console.log( "ready!" );
 
-    var gameInstance = new Game();
+	var gameInstance = new Game();
 
 
     //  hide all researchables
@@ -45,7 +45,73 @@ $( document ).ready(function() {
     });
 
     $('body').tooltip({
-	    selector: '[rel=tooltip]'
+    	selector: '[rel=tooltip]'
+    });
+
+    jQuery.getJSON( "assets/changelogs/changelog.json", function( data ) {
+    	//console.log(data);
+    	var items = [];
+    	$.each(data, function(index, item) {
+    		console.log(item)
+    		items.push('<h3 class="changelog-version">Version ' + item.version + '</h3>');
+    		items.push('<h5 class="changelog-date">' + item.date + '</h5>');
+
+    		if(item.added.length > 0) {
+    			var added = '<h4 class="changelog-type">Added:</h4><ul class="changelog-list">';
+    			for (var i = item.added.length - 1; i >= 0; i--) {
+    				added += '<li>' + item.added[i] + '</li>';
+    			};
+
+    			added += '</ul>';
+    			items.push(added);
+    			console.log("Found additions!");
+    		}
+
+    		if(item.changed.length > 0) {
+    			var changed = '<h4 class="changelog-type">Changed:</h4><ul class="changelog-list">';
+    			for (var i = item.changed.length - 1; i >= 0; i--) {
+    				changed += '<li>' + item.changed[i] + '</li>';
+    			};
+
+    			changed += '</ul>';
+    			items.push(changed);
+    			console.log("Found changes!");
+    		}
+
+    		if(item.fixed.length > 0) {
+    			var fixed = '<h4 class="changelog-type">Fixed:</h4><ul class="changelog-list">';
+    			for (var i = item.fixed.length - 1; i >= 0; i--) {
+    				fixed += '<li>' + item.fixed[i] + '</li>';
+    			};
+
+    			fixed += '</ul>';
+    			items.push(fixed);
+    			console.log("Found fixes!");
+    		}
+
+    		if(item.removed.length > 0) {
+    			var removed = '<h4 class="changelog-type">Removed:</h4><ul class="changelog-list">';
+    			for (var i = item.removed.length - 1; i >= 0; i--) {
+    				removed += '<li>' + item.removed[i] + '</li>';
+    			};
+
+    			removed += '</ul>';
+    			items.push(removed);
+    			console.log("Found removals!");
+    		}
+
+    		if(index != data.length - 1) {
+    			items.push('<hr>');
+    		}
+    		
+    	});
+
+		$.each(items, function(index, item) {
+			$('.changelog-body').append(item);
+		});
+
+		console.log(items);
+
 	});
 });
 
@@ -188,9 +254,9 @@ var Game = function() {
 				colonistCapacity: 10,
 				foodConsumptionRate: 0.2,
 				requiredColonists: 0,
-				fertilityRate: 0.05,
+				fertilityRate: 0.1,
 				deathRate: 0.001,
-				immigrationRate: 0.05,
+				immigrationRate: 0.10,
 				lastSave: Date.now(),
 				test: 0
 			}
@@ -211,7 +277,7 @@ var Game = function() {
 				Data.research[Object.keys(Research)[i]] = 0;
 			};
 
-			addBuilding('house', 4);
+			addBuilding('house', 3);
 			addBuilding('farm', 2);
 
 			addResource('wood', 50);
@@ -384,7 +450,7 @@ var Game = function() {
 						skipBuilding = true;
 						break;
 					} else {*/
-					Data.production[resource] += Buildings[buildingName].generates[resource] * count * Data.productivity * Bonuses.production[resource];
+						Data.production[resource] += Buildings[buildingName].generates[resource] * count * Data.productivity * Bonuses.production[resource];
 
 					//}
 				}
@@ -867,14 +933,14 @@ var Game = function() {
 	}
 
 	return {
-         beginGame: beginGame,
-         doAction: doAction,
-         doPurchaseBuilding: doPurchaseBuilding,
-         doDestroyBuilding: doDestroyBuilding,
-         doResearch: doResearch,
-         update: update,
-         saveGame: saveGame,
-         resetGame: resetGame
-    }
+		beginGame: beginGame,
+		doAction: doAction,
+		doPurchaseBuilding: doPurchaseBuilding,
+		doDestroyBuilding: doDestroyBuilding,
+		doResearch: doResearch,
+		update: update,
+		saveGame: saveGame,
+		resetGame: resetGame
+	}
 
 }
