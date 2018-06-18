@@ -6,7 +6,8 @@
 			"Changelogs to the main screen",
 			"Version number to the header",
 			"Level 2 building mechanics",
-			"Added marketplace research & the beginnings of the marketplace"
+			"Added marketplace research & the beginnings of the marketplace",
+			"Github commit revision number to header for easier debugging"
 		],
 		"changed": [
 			"Altered starting house number to prevent food decay at max population with no workers",

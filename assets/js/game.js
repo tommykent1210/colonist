@@ -48,6 +48,11 @@ $( document ).ready(function() {
     	selector: '[rel=tooltip]'
     });
 
+    $.get('assets/revision', function(data)) {
+    	console.log(data);
+    	$('span.revision').text("-"+html.substring(1,8));
+    }
+
     jQuery.getJSON( "assets/changelogs/changelog.json", function( data ) {
     	//console.log(data);
     	var items = [];
