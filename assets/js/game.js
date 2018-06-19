@@ -2,7 +2,6 @@ $( document ).ready(function() {
 	console.log( "ready!" );
 
 	var gameInstance = new Game();
-	var version = 'v0.1.1 ';
 
     //  hide all researchables
     $('.research-hidden').hide();
@@ -49,15 +48,15 @@ $( document ).ready(function() {
     });
 
     $.get('assets/revision', function(data) {
-    	console.log(data);
-    	$('span.revision').text(version + " - "+data.substring(3,8));
+    	//console.log(data);
+    	$('span.revision').text(gameInstance.getVersion() + " - "+data.substring(3,8));
     });
 
     jQuery.getJSON( "assets/changelogs/changelog.json", function( data ) {
     	//console.log(data);
     	var items = [];
     	$.each(data, function(index, item) {
-    		console.log(item)
+    		//console.log(item)
     		items.push('<h3 class="changelog-version">Version ' + item.version + '</h3>');
     		items.push('<h5 class="changelog-date">' + item.date + '</h5>');
 
@@ -69,7 +68,7 @@ $( document ).ready(function() {
 
     			added += '</ul>';
     			items.push(added);
-    			console.log("Found additions!");
+    			//console.log("Found additions!");
     		}
 
     		if(item.changed.length > 0) {
@@ -80,7 +79,7 @@ $( document ).ready(function() {
 
     			changed += '</ul>';
     			items.push(changed);
-    			console.log("Found changes!");
+    			//console.log("Found changes!");
     		}
 
     		if(item.fixed.length > 0) {
@@ -91,7 +90,7 @@ $( document ).ready(function() {
 
     			fixed += '</ul>';
     			items.push(fixed);
-    			console.log("Found fixes!");
+    			//console.log("Found fixes!");
     		}
 
     		if(item.removed.length > 0) {
@@ -102,7 +101,7 @@ $( document ).ready(function() {
 
     			removed += '</ul>';
     			items.push(removed);
-    			console.log("Found removals!");
+    			//console.log("Found removals!");
     		}
 
     		if(index != data.length - 1) {
@@ -115,7 +114,7 @@ $( document ).ready(function() {
 			$('.changelog-body').append(item);
 		});
 
-		console.log(items);
+		//console.log(items);
 
 	});
 });
@@ -128,6 +127,9 @@ var Game = function() {
 	var maxMessages = 30;
 	var Debug = true;
 	var GameStarted = false;
+	var ticks = 0;
+
+	var version = 'v0.1.2 ';
 
 	var Bonuses, BaseBonuses = {};
 
@@ -285,9 +287,21 @@ var Game = function() {
 
 	function beginGame() {
 		console.log('begin');
-		console.log(Data);
-		initialise();
-		console.log(Data);
+		//console.log(Data);
+
+
+		// check if a previous save game exists
+		if(checkForPreviousGame()) {
+
+			initialise(false);
+			// try to load a save
+			loadGame();
+		} else {
+
+			initialise(true);
+		}
+
+		//console.log(Data);
 		updateBuildingCosts();
 		$('[data-toggle="tooltip"], .is_tooltip').tooltip();
 
@@ -297,7 +311,7 @@ var Game = function() {
 		
 	}
 
-	function initialise() {
+	function initialise(newgame) {
 		BaseBonuses = {
 			globalbonus: {
 				productivity: 1,
@@ -318,7 +332,7 @@ var Game = function() {
 		if(Object.keys(Data).length === 0 && Data.constructor === Object) {
 			//Object is empty!
 			Data = {
-				version: "1.0",
+				version: version,
 				buildings: {},
 				resources: {},
 				production: {},
@@ -332,7 +346,6 @@ var Game = function() {
 				deathRate: 0.001,
 				immigrationRate: 0.10,
 				lastSave: Date.now(),
-				test: 0
 			}
 
 			for (var i = Object.keys(Resources).length - 1; i >= 0; i--) {
@@ -376,11 +389,17 @@ var Game = function() {
 
 		$('.resourceListRow').hide();
 
-		unlockResource('food');
-		unlockResource('wood');
-		unlockResource('stone');
+		if(newgame == true) {
+			unlockBaseResources();
+			addMessage('[Game] New game started');
+		}
+	}
 
-		addMessage('[Game] New game started');
+	function unlockBaseResources() {
+
+			unlockResource('food');
+			unlockResource('wood');
+			unlockResource('stone');
 	}
 
 	function doAction(action, actionvalue) {
@@ -845,6 +864,16 @@ var Game = function() {
 		});
 	}
 
+	function loadResearchFromSave() {
+		for (var i = Object.keys(Data.research).length - 1; i >= 0; i--) {
+			var researchName = Object.keys(Data.research)[i];
+			if(Data.research[researchName] == 1) {
+				$('.research[data-task="'+researchName+'"]').prop('disabled', true).addClass('disabled').removeClass('btn-primary').addClass('btn-success');
+			}
+		};
+		
+	}
+
 	function recalculateBonuses() {
 		//reset bonuses
 		Bonuses = JSON.parse(JSON.stringify(BaseBonuses));
@@ -962,11 +991,16 @@ var Game = function() {
 		if(GameStarted == true){ 
 			console.log('update');
 
+			ticks += 1;
+
 			updateProduction();
 			doProduction();
 			doDeath();
 			doBirthImmigration();
 
+			if(ticks % 20 == 0) {
+				saveGame();
+			}
 
 			updateProductivity();
 
@@ -990,7 +1024,50 @@ var Game = function() {
 	}
 
 	function saveGame() {
-		console.log('saving...');
+		Cookies.set('savegame', Data);
+		addMessage('[Game] Saved the game');
+		//console.log(Cookies.get());
+	}
+
+	function loadGame() {
+		if(checkForPreviousGame()) {
+			var savegame = JSON.parse(Cookies.get('savegame'));
+			console.log("Savegame file");
+			console.log(savegame);
+			if( savegame.version == version) {
+				// begin loading the game
+				Data = JSON.parse(JSON.stringify(savegame));
+
+				for (var i = Object.keys(Data.resources).length - 1; i >= 0; i--) {
+					if(Data.resources[Object.keys(Data.resources)[i]] > 0) {
+						unlockResource(Object.keys(Data.resources)[i]);
+					}
+				};
+
+				loadResearchFromSave();
+
+				return true;
+			} else {
+				addMessage("[Game] Found a previous save from another version, unable to load");
+				//reinitialise the game!
+				unlockBaseResources();
+				return false;
+			}
+		}
+		return false;
+	}
+
+	function checkForPreviousGame() {
+		if(Cookies.get('savegame') != undefined) {
+			
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function getVersion() {
+		return version;
 	}
 
 	function resetGame() {
@@ -1056,7 +1133,8 @@ var Game = function() {
 		doResearch: doResearch,
 		update: update,
 		saveGame: saveGame,
-		resetGame: resetGame
+		resetGame: resetGame,
+		getVersion: getVersion
 	}
 
 }

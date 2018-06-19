@@ -1,5 +1,16 @@
 [
 	{
+		"version":"0.1.2",
+		"date": "19th June 2018",
+		"added": [
+			"Game saving"
+		],
+		"changed": [],
+		"fixed": [],
+		"removed": []
+
+	},
+	{
 		"version":"0.1.1",
 		"date": "18th June 2018",
 		"added": [
