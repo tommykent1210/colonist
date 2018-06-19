@@ -3,9 +3,12 @@
 		"version":"0.1.2",
 		"date": "19th June 2018",
 		"added": [
-			"Game saving"
+			"Game saving",
+			"Game reset button (warning: this clears your save!)"
 		],
-		"changed": [],
+		"changed": [
+			"Prevented nofitication of unlocked resources when loading the game"
+		],
 		"fixed": [],
 		"removed": []
 

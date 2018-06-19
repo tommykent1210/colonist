@@ -7,7 +7,6 @@ $( document ).ready(function() {
     $('.research-hidden').hide();
 
     $('.reset').on('click', function() {
-    	console.log('game started');
     	gameInstance.resetGame();
     });
 
@@ -390,16 +389,16 @@ var Game = function() {
 		$('.resourceListRow').hide();
 
 		if(newgame == true) {
-			unlockBaseResources();
+			unlockBaseResources(false);
 			addMessage('[Game] New game started');
 		}
 	}
 
-	function unlockBaseResources() {
+	function unlockBaseResources(notify) {
 
-			unlockResource('food');
-			unlockResource('wood');
-			unlockResource('stone');
+			unlockResource('food', notify);
+			unlockResource('wood', notify);
+			unlockResource('stone', notify);
 	}
 
 	function doAction(action, actionvalue) {
@@ -591,7 +590,7 @@ var Game = function() {
 				}
 
 				if(Data.production[resource] > 0 && ResourcesUnlocked[resource] == 0) {
-					unlockResource(resource);
+					unlockResource(resource, true);
 				}
 
 				if(Data.resources[resource] < 0 || isNaN(Data.resources[resource])) {
@@ -602,11 +601,12 @@ var Game = function() {
 		}
 	}
 
-	function unlockResource(resource) {
+	function unlockResource(resource, notify) {
 		ResourcesUnlocked[resource] = 1;
 		$('.resourceListRow[data-resource="'+ resource +'"]').show();
-		addMessage('[Colony] You unlocked a resource: ' + resource);
-
+		if(notify) {
+			addMessage('[Colony] You unlocked a resource: ' + resource);
+		}
 	}
 
 	function updateResourceLabels() {
@@ -1073,10 +1073,8 @@ var Game = function() {
 	function resetGame() {
 		console.log('reset!');
 
-		clearInterval(update);
-		clearInterval(redraw);
-
-		beginGame();
+		Cookies.remove('savegame');
+		location.reload();
 	}
 
 	function numberFormat (labelValue) {
