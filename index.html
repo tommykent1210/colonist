@@ -13,6 +13,41 @@
   <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="./assets/css/custom.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Cutive+Mono|PT+Sans" rel="stylesheet">
+
+
+  <script id="marketplace-template" type="text/x-jsrender">
+    <div class="row marketplace-row">
+      <div class="col-md-3">{{:resourceTitle}}</div> 
+      <div class="col-md-9"> 
+        <button class="btn btn-primary" data-item="{{:resourceHandle}}" data-amount="1" data-action="buy">+1</button> 
+        <button class="btn btn-primary" data-item="{{:resourceHandle}}" data-amount="10" data-action="buy">+10</button> 
+        <button class="btn btn-primary" data-item="{{:resourceHandle}}" data-amount="100" data-action="buy">+100</button> 
+        <button class="btn btn-danger" data-item="{{:resourceHandle}}" data-amount="1" data-action="sell">-1</button> 
+        <button class="btn btn-danger" data-item="{{:resourceHandle}}" data-amount="10" data-action="sell">-10</button> 
+        <button class="btn btn-danger" data-item="{{:resourceHandle}}" data-amount="100" data-action="sell">-100</button> 
+      </div> 
+    </div>
+  </script>
+
+  <script id="purchase-building" type="text/x-jsrender">
+
+    {{if researchRequired}}
+    <div class="col-md-6 research-hidden" data-research="{{:research}}">
+    {{else}}
+    <div class="col-md-6">
+    {{/if}}
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{:title}}</h5>
+          <p class="card-subtitle">{{:description}}</p>
+          <p class="card-text card-resources"><span class="cost" data-building="{{:handle}}"></span></p>
+          <p class="card-text card-resources"><span class="production-text" data-building="{{:handle}}">&nbsp;</span></p>
+          <button class="btn btn-primary purchase btn-halfwidth" data-building="{{:handle}}" data-amount="1">Buy 1</button>
+          <button class="btn btn-danger destroy btn-halfwidth" data-building="{{:handle}}" data-amount="1">Destroy 1</button>
+        </div>
+      </div>
+    </div>
+  </script>
 </head>
 
 <body>
@@ -88,7 +123,7 @@
                     <th scope="col">Handle</th>
                   </tr>
                 </thead>-->
-                <tbody>
+                <tbody class="resourceProduction">
                   <tr>
                     <th scope="row">Colonists:</th>
                     <td><span class="data colonists">0/0</span></td>
@@ -109,6 +144,7 @@
                     <td><span class="data productivity">100</span>%</td>
                     <td></td>
                   </tr>
+
                   <tr class="resourceListRow" data-resource="food">
                     <th scope="row"><img class="resource-icon" src="assets/img/resources/food.png"/> Food:</th>
                     <td><span class="resource food">0</span></td>
@@ -362,167 +398,35 @@
             <div class="tab-pane fade show active" id="buildings" role="tabpanel" aria-labelledby="building-tab">
               <!-- START: buildings -->
               <div class="tab-box">
-                <div class="body">
+                <div class="body building-purchase-container">
 
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title text-center">House</h5>
-                          <p class="card-subtitle">Provides housing for 6 colonists</p>
-                          <p class="card-text card-resources"><span class="cost" data-building="house"></span></p>
-                          <p class="card-text card-resources"><span class="production-text" data-building="house">&nbsp;</span></p>
-                          <button class="btn btn-primary purchase btn-halfwidth" data-building="house" data-amount="1">Buy 1</button>
-                          <button class="btn btn-danger destroy btn-halfwidth" data-building="house" data-amount="1">Destroy 1</button>
-                        </div>
-                      </div>
+                  <div class="row category-housing">
+                    <div class="col-md-12">
+                      <h5>Housing</h5>
                     </div>
+                  </div>
 
-                    <div class="col-md-6">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title text-center">Woodshack</h5>
-                          <p class="card-subtitle">Lumberjacks generate wood here</p>
-                          <p class="card-text card-resources"><span class="cost" data-building="woodshack"></span></p>
-                          <p class="card-text card-resources"><span class="production-text" data-building="woodshack">&nbsp;</span></p>
-                          <button class="btn btn-primary purchase btn-halfwidth" data-building="woodshack" data-amount="1">Buy 1</button>
-                          <button class="btn btn-danger destroy btn-halfwidth" data-building="woodshack" data-amount="1">Destroy 1</button>
-                        </div>
-                      </div>
+                  <div class="row category-production margin-top">
+                    <div class="col-md-12">
+                      <h5>Production</h5>
                     </div>
+                  </div>
 
-                    <div class="col-md-6">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title text-center">Farm</h5>
-                          <p class="card-subtitle">Farms provide basic food</p>
-                          <p class="card-text card-resources"><span class="cost" data-building="farm"></span></p>
-                          <p class="card-text card-resources"><span class="production-text" data-building="farm">&nbsp;</span></p>
-                          <button class="btn btn-primary purchase btn-halfwidth" data-building="farm" data-amount="1">Buy 1</button>
-                          <button class="btn btn-danger destroy btn-halfwidth" data-building="farm" data-amount="1">Destroy 1</button>
-                        </div>
-                      </div>
+                  <div class="row category-refining margin-top research-hidden" data-research="charcoalsmelting">
+                    <div class="col-md-12">
+                      <h5>Refining</h5>
                     </div>
+                  </div>
 
-
-                    <div class="col-md-6 research-hidden" data-research="milling">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title text-center">Mill</h5>
-                          <p class="card-subtitle">Process food to increase yield</p>
-                          <p class="card-text card-resources"><span class="cost" data-building="mill"></span></p>
-                          <p class="card-text card-resources"><span class="production-text" data-building="mill">&nbsp;</span></p>
-                          <button class="btn btn-primary purchase btn-halfwidth" data-building="mill" data-amount="1">Buy 1</button>
-                          <button class="btn btn-danger destroy btn-halfwidth" data-building="mill" data-amount="1">Destroy 1</button>
-                        </div>
-                      </div>
+                  <div class="row category-manufacturing margin-top research-hidden" data-research="toolmaking">
+                    <div class="col-md-12">
+                      <h5>Manufacturing</h5>
                     </div>
+                  </div>
 
-                    <div class="col-md-6">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title text-center">Iron Mine</h5>
-                          <p class="card-subtitle">Mines provide ores and stone</p>
-                          <p class="card-text card-resources"><span class="cost" data-building="ironmine"></span></p>
-                          <p class="card-text card-resources"><span class="production-text" data-building="ironmine">&nbsp;</span></p>
-                          <button class="btn btn-primary purchase btn-halfwidth" data-building="ironmine" data-amount="1">Buy 1</button>
-                          <button class="btn btn-danger destroy btn-halfwidth" data-building="ironmine" data-amount="1">Destroy 1</button>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class="col-md-6 research-hidden" data-research="goldmining">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title text-center">Gold Mine</h5>
-                          <p class="card-subtitle">Mine gold ore from gold rich veins</p>
-                          <p class="card-text card-resources"><span class="cost" data-building="goldmine"></span></p>
-                          <p class="card-text card-resources"><span class="production-text" data-building="goldmine">&nbsp;</span></p>
-                          <button class="btn btn-primary purchase btn-halfwidth" data-building="goldmine" data-amount="1">Buy 1</button>
-                          <button class="btn btn-danger destroy btn-halfwidth" data-building="goldmine" data-amount="1">Destroy 1</button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6 research-hidden" data-research="charcoalsmelting">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title text-center">Charcoal Kiln</h5>
-                          <p class="card-subtitle">Turns wood to charcoal</p>
-                          <p class="card-text card-resources"><span class="cost" data-building="charcoalkiln"></span></p>
-                          <p class="card-text card-resources"><span class="production-text" data-building="charcoalkiln">&nbsp;</span></p>
-                          <button class="btn btn-primary purchase btn-halfwidth" data-building="charcoalkiln" data-amount="1">Buy 1</button>
-                          <button class="btn btn-danger destroy btn-halfwidth" data-building="charcoalkiln" data-amount="1">Destroy 1</button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6 research-hidden" data-research="ironsmelting">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title text-center">Iron Forge</h5>
-                          <p class="card-subtitle">Refines iron ore into iron ingots</p>
-                          <p class="card-text card-resources"><span class="cost" data-building="ironforge"></span></p>
-                          <p class="card-text card-resources"><span class="production-text" data-building="ironforge">&nbsp;</span></p>
-                          <button class="btn btn-primary purchase btn-halfwidth" data-building="ironforge" data-amount="1">Buy 1</button>
-                          <button class="btn btn-danger destroy btn-halfwidth" data-building="ironforge" data-amount="1">Destroy 1</button>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class="col-md-6 research-hidden" data-research="goldsmelting">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title text-center">Gold Forge</h5>
-                          <p class="card-subtitle">Refines gold ore into gold ingots</p>
-                          <p class="card-text card-resources"><span class="cost" data-building="goldforge"></span></p>
-                          <p class="card-text card-resources"><span class="production-text" data-building="goldforge">&nbsp;</span></p>
-                          <button class="btn btn-primary purchase btn-halfwidth" data-building="goldforge" data-amount="1">Buy 1</button>
-                          <button class="btn btn-danger destroy btn-halfwidth" data-building="goldforge" data-amount="1">Destroy 1</button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6 research-hidden" data-research="toolmaking">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title text-center">Toolery</h5>
-                          <p class="card-subtitle">Turns iron into tools</p>
-                          <p class="card-text card-resources"><span class="cost" data-building="toolery"></span></p>
-                          <p class="card-text card-resources"><span class="production-text" data-building="toolery">&nbsp;</span></p>
-                          <button class="btn btn-primary purchase btn-halfwidth" data-building="toolery" data-amount="1">Buy 1</button>
-                          <button class="btn btn-danger destroy btn-halfwidth" data-building="toolery" data-amount="1">Destroy 1</button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6 research-hidden" data-research="scientificresearch">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title text-center">Lab</h5>
-                          <p class="card-subtitle">Progress your colony!</p>
-                          <p class="card-text card-resources"><span class="cost" data-building="lab"></span></p>
-                          <p class="card-text card-resources"><span class="production-text" data-building="lab">&nbsp;</span></p>
-                          <button class="btn btn-primary purchase btn-halfwidth" data-building="lab" data-amount="1">Buy 1</button>
-                          <button class="btn btn-danger destroy btn-halfwidth" data-building="lab" data-amount="1">Destroy 1</button>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class="col-md-6 research-hidden" data-research="minting">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title text-center">Mint</h5>
-                          <p class="card-subtitle">Convert gold to coins</p>
-                          <p class="card-text card-resources"><span class="cost" data-building="mint"></span></p>
-                          <p class="card-text card-resources"><span class="production-text" data-building="mint">&nbsp;</span></p>
-                          <button class="btn btn-primary purchase btn-halfwidth" data-building="mint" data-amount="1">Buy 1</button>
-                          <button class="btn btn-danger destroy btn-halfwidth" data-building="mint" data-amount="1">Destroy 1</button>
-                        </div>
-                      </div>
+                  <div class="row category-science margin-top research-hidden" data-research="scientificresearch">
+                    <div class="col-md-12">
+                      <h5>Science</h5>
                     </div>
                   </div>
                   
@@ -623,6 +527,7 @@
     <script src="./assets/js/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.90/jsrender.min.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
     <script src="./assets/js/game.js"></script>
   </body>

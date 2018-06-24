@@ -137,21 +137,22 @@ var Game = function() {
 	addMessage('[Game] Game Engine Started');
 
 	var Buildings = {
-		house: { type: "house", cost: {wood: 20, stone: 25}, capacity: 6, workers: 0, generates: {} },
-		woodshack: { type: "production", cost: {wood: 5, stone: 15}, capacity: 0, workers: 2, generates: {wood: 2} },
-		farm: { type: "production", cost: {wood: 20, stone: 10}, capacity: 0, workers: 4, generates: {food: 2} },
-		ironmine: { type: "production", cost: {wood: 15, stone: 5}, capacity: 0, workers: 3, generates: {ironore: 0.25, stone: 0.5} },
-		charcoalkiln: { type: "refining", cost: {wood: 20, stone: 15}, capacity: 0, workers: 2, generates: {wood: -1, charcoal: 0.5} },
-		ironforge: { type: "refining", cost: {wood: 10, stone: 35}, capacity: 0, workers: 3, generates: {ironore: -0.5, charcoal: -0.5, iron: 0.25} },
-		toolery: { type: "refining", cost: {wood: 150, stone: 50, iron: 20}, capacity: 0, workers: 3, generates: {iron: -0.5, tools: 0.25} },
-		lab: { type: "science", cost: {wood: 150, stone: 100, tools: 20}, capacity: 0, workers: 3, generates: {tools: -0.15, science: 0.5} },
-		goldmine: { type: "production", cost: {wood: 150, stone: 100, tools: 20}, capacity: 0, workers: 4, generates: {tools: -0.1, goldore: 0.2} },
-		goldforge: { type: "refining", cost: {wood: 350, stone: 200, tools: 50}, capacity: 0, workers: 3, generates: {tools: -0.15, goldore: -0.2, gold: 0.1} },
-		mint: { type: "refining", cost: {wood: 350, stone: 200, tools: 50, gold: 20}, capacity: 0, workers: 3, generates: {gold: -0.1, coins: 0.2} },
+		house: { type: "housing", title: "Small House", description: "Provides housing for 6 colonists", researchRequired: false, research: "", cost: {wood: 20, stone: 25}, capacity: 6, workers: 0, generates: {} },
+		woodshack: { type: "production", title: "Wood Shack", description: "Lumberjacks generate wood here", researchRequired: false, research: "", cost: {wood: 5, stone: 15}, capacity: 0, workers: 2, generates: {wood: 2} },
+		farm: { type: "production", title: "Farm", description: "Farms provide basic food", researchRequired: false, research: "", cost: {wood: 20, stone: 10}, capacity: 0, workers: 4, generates: {food: 2} },
+		ironmine: { type: "production", title: "Iron Mine", description: "Mines provide ores and stone", researchRequired: false, research: "", cost: {wood: 15, stone: 5}, capacity: 0, workers: 3, generates: {ironore: 0.25, stone: 0.5} },
+		charcoalkiln: { type: "refining", title: "Charcoal Kiln", description: "Turns wood to charcoal", researchRequired: true, research: "charcoalsmelting", cost: {wood: 20, stone: 15}, capacity: 0, workers: 2, generates: {wood: -1, charcoal: 0.5} },
+		ironforge: { type: "refining", title: "Iron Forge", description: "Refines iron ore into iron ingots", researchRequired: true, research: "ironsmelting", cost: {wood: 10, stone: 35}, capacity: 0, workers: 3, generates: {ironore: -0.5, charcoal: -0.5, iron: 0.25} },
+		toolery: { type: "manufacturing", title: "Toolery", description: "Turns iron into tools", researchRequired: true, research: "toolmaking", cost: {wood: 150, stone: 50, iron: 20}, capacity: 0, workers: 3, generates: {iron: -0.5, tools: 0.25} },
+		lab: { type: "science", title: "Science Lab", description: "Progress your colony!", researchRequired: true, research: "scientificresearch", cost: {wood: 150, stone: 100, tools: 20}, capacity: 0, workers: 3, generates: {tools: -0.15, science: 0.5} },
+		goldmine: { type: "production", title: "Gold Mine", description: "Mine gold ore from gold rich veins", researchRequired: true, research: "goldmining", cost: {wood: 150, stone: 100, tools: 20}, capacity: 0, workers: 4, generates: {tools: -0.1, goldore: 0.2} },
+		goldforge: { type: "refining", title: "Gold Forge", description: "Refines gold ore into gold ingots", researchRequired: true, research: "goldsmelting", cost: {wood: 350, stone: 200, tools: 50}, capacity: 0, workers: 3, generates: {tools: -0.15, goldore: -0.2, gold: 0.1} },
+		mint: { type: "manufacturing", title: "Mint", description: "Convert gold to coins", researchRequired: true, research: "minting", cost: {wood: 350, stone: 200, tools: 50, gold: 20}, capacity: 0, workers: 3, generates: {gold: -0.1, coins: 0.2} },
 
 		// level 2 buildings
-		mill: { type: "production", cost: {wood: 650, stone: 500, tools: 50}, capacity: 0, workers: 4, generates: {tools: -0.25, food: 2} },
+		mill: { type: "production", title: "Mill", description: "Process food to increase yield", researchRequired: true, research: "milling", cost: {wood: 650, stone: 500, tools: 50}, capacity: 0, workers: 4, generates: {tools: -0.25, food: 2} },
 	};
+
 
 	//var Resources = ["science", "wood", "stone", "food", "ironore", "iron", "tools", "charcoal", "goldore", "gold", "coins"];
 
@@ -305,6 +306,7 @@ var Game = function() {
 		$('[data-toggle="tooltip"], .is_tooltip').tooltip();
 
 		GameStarted = true;
+
 		setInterval(update, 1000);
 		setInterval(redraw, 100);
 		
@@ -383,8 +385,10 @@ var Game = function() {
 
 
 			recalculateBonuses();
-			generateMarketplaceList();
 		}
+
+		generateMarketplaceList();
+		generateBuildings();
 
 		$('.resourceListRow').hide();
 
@@ -399,6 +403,8 @@ var Game = function() {
 			unlockResource('food', notify);
 			unlockResource('wood', notify);
 			unlockResource('stone', notify);
+
+
 	}
 
 	function doAction(action, actionvalue) {
@@ -430,7 +436,7 @@ var Game = function() {
 			addMessage('[Building] Success! Purchased ' + building + '!');
 		} else {
 			// tell the user no
-			addMessage('[Building]Fail! Not enough resources!');
+			addMessage('[Building] Fail! Not enough resources!');
 		}
 
 		// if its a house, update capacity!
@@ -633,6 +639,42 @@ var Game = function() {
 		$('span.data.requiredWorkers').text((Data.requiredColonists).toFixed(0));
 		$('span.data.fertility').text((Data.fertilityRate * 100).toFixed(1));
 		$('span.data.colonists').text((Data.colonists).toFixed(0)+'/'+ (Data.colonistCapacity * Bonuses.globalbonus.colonistCapacity));
+	}
+
+	function generateBuildings() {
+
+		//generate a list of buildings, separated by function
+		var buildingList = {
+			housing: [],
+			production: [],
+			refining: [],
+			manufacturing: [],
+			science: []
+		};
+
+		for (var i = Object.keys(Buildings).length - 1; i >= 0; i--) {
+
+			buildingList[Buildings[Object.keys(Buildings)[i]].type].push(Object.keys(Buildings)[i]);
+		};
+
+		
+
+		for (var i = Object.keys(buildingList).length - 1; i >= 0; i--) {
+			for (var j = buildingList[Object.keys(buildingList)[i]].length - 1; j >= 0; j--) {
+				var building = buildingList[Object.keys(buildingList)[i]][j];
+				var buildingObj = Buildings[building];
+				buildingObj["handle"] = building;
+
+				var tmpl = $.templates("#purchase-building");
+				var templateData = buildingObj;
+				var html = tmpl.render(templateData);
+				$('.building-purchase-container .category-'+buildingObj.type).append(html);
+				console.log(html);
+			};
+
+		};
+
+
 	}
 
 	function updateBuildingLabels() {
@@ -955,9 +997,10 @@ var Game = function() {
 			var res = Object.keys(Resources)[i];
 
 			if(Resources[res].market == true) {
-
-
-				var string = '<div class="row marketplace-row"><div class="col-md-3">'+Resources[res].title+'</div> <div class="col-md-9"> <button class="btn btn-primary" data-item="'+res+'" data-amount="1" data-action="buy">+1</button> <button class="btn btn-primary" data-item="'+res+'" data-amount="10" data-action="buy">+10</button> <button class="btn btn-primary" data-item="'+res+'" data-amount="100" data-action="buy">+100</button> <button class="btn btn-danger" data-item="'+res+'" data-amount="1" data-action="sell">-1</button> <button class="btn btn-danger" data-item="'+res+'" data-amount="10" data-action="sell">-10</button> <button class="btn btn-danger" data-item="'+res+'" data-amount="100" data-action="sell">-100</button> </div> </div>'; $('.marketplace-body').append(string);
+				var tmpl = $.templates("#marketplace-template");
+				var templateData = {resourceTitle: Resources[res].title, resourceHandle: res};
+				var html = tmpl.render(templateData);
+				$('.marketplace-body').append(html);
 			}
 		};
 	}
