@@ -48,6 +48,14 @@
       </div>
     </div>
   </script>
+
+  <script id="research-button" type="text/x-jsrender">
+  {{if researchRequired}}
+  <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="{{:handle}}" data-task="goldmining"><span class="research-description"></span></button>
+  {{else}}
+  <button class="btn btn-primary btn-fullwidth research" data-task="{{:handle}}"><span class="research-description"></span></button>
+  {{/if}}
+  </script>
 </head>
 
 <body>
@@ -438,67 +446,27 @@
             </div>
             <div class="tab-pane fade" id="research" role="tabpanel" aria-labelledby="research-tab">
               <div class="tab-box">
-                <div class="body">
+                <div class="body research-button-container">
 
-                  <div class="row">
-                    <div class="col-md-12">
-
+                  <div class="row ">
+                    <div class="col-md-12 category-unlock">
                       <h5>Buildings & Items</h5>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="toolmaking" data-task="goldmining"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="charcoalsmelting"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="charcoalsmelting" data-task="ironsmelting"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="goldmining" data-task="goldsmelting"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="charcoalsmelting" data-task="toolmaking"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="ironsmelting" data-task="scientificresearch"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="goldsmelting" data-task="coinminting"><span class="research-description"></span></button>
-                      
-                      
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="coinminting" data-task="marketplace"><span class="research-description"></span></button>
-
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="coinminting" data-task="buildinglevel2"><span class="research-description"></span></button>
-
-
-                      <h5 class="research-hidden margin-top" data-research="buildinglevel2">Level 2 Buildings</h5>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="buildinglevel2" data-task="milling"><span class="research-description"></span></button>
-
-
-                      <h5 class="margin-top">Global Bonuses</h5>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="reducedfood"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="reducedfood2"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="reducedfood3"><span class="research-description"></span></button>
-                      <h5 class="margin-top">Production Bonuses</h5>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="foodproduction1"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="foodproduction2"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="foodproduction3"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="woodcutting1"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="woodcutting2"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="woodcutting3"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="stonecutting1"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="stonecutting2"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="stonecutting3"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="ironmining1"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="ironmining2"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research" data-task="ironmining3"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="ironsmelting" data-task="ironrefining1"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="ironsmelting" data-task="ironrefining2"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="ironsmelting" data-task="ironrefining3"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="charcoalsmelting" data-task="charcoal1"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="charcoalsmelting" data-task="charcoal2"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="charcoalsmelting" data-task="charcoal3"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="toolmaking" data-task="tooling1"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="toolmaking" data-task="tooling2"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="toolmaking" data-task="tooling3"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="scientificresearch" data-task="researching1"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="scientificresearch" data-task="researching2"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="scientificresearch" data-task="researching3"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="goldmining" data-task="goldmining1"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="goldmining" data-task="goldmining2"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="goldmining" data-task="goldmining3"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="goldsmelting" data-task="goldrefining1"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="goldsmelting" data-task="goldrefining2"><span class="research-description"></span></button>
-                      <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="goldsmelting" data-task="goldrefining3"><span class="research-description"></span></button>
                     </div>
                   </div>
+
+                  <div class="row margin-top">
+                    <div class="col-md-12 category-global">
+                      <h5>Global Bonuses</h5>
+                    </div>
+                  </div>
+
+                  <div class="row margin-top">
+                    <div class="col-md-12 category-production">
+                      <h5>Production</h5>
+                    </div>
+                  </div>
+
+
                 </div>
               </div>
             </div>
@@ -507,8 +475,18 @@
               <div class="tab-box">
                 <div class="body">
 
-                  <div class="marketplace-body">
+                  <div class="marketplace-body container">
+                    <div class="row marketplace-row">
+                      <div class="form-inline">
+                        
+                        <label class="" for="marketplace-amount">You can use the marketplace to buy and sell resources</label>
+                        <label class="" for="marketplace-amount">Enter an amount:</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                          <input type="text" class="form-control" id="marketplace-amount" placeholder="1000">
+                        </div>
 
+                      </div>
+                    </div>
                     
                   </div>
                 </div>

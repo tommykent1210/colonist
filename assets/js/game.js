@@ -215,63 +215,63 @@ var Game = function() {
 	};
 
 	var Research = {
-		reducedfood: { title: 'Reduced Food Cost Level 1 (-10%)', cost: { science: 100, food: 250}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
-		reducedfood2: { title: 'Reduced Food Cost Level 2 (-10%)', cost: { science: 300, food: 500}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
-		reducedfood3: { title: 'Reduced Food Cost Level 3 (-10%)', cost: { science: 750, food: 1000}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
+		reducedfood: { title: 'Reduced Food Cost Level 1 (-10%)',researchRequired: false, research: "", type: "global",  cost: { science: 100, food: 250}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
+		reducedfood2: { title: 'Reduced Food Cost Level 2 (-10%)',researchRequired: true, research: "reducedfood1", type: "global",  cost: { science: 300, food: 500}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
+		reducedfood3: { title: 'Reduced Food Cost Level 3 (-10%)',researchRequired: true, research: "reducedfood2", type: "global",  cost: { science: 750, food: 1000}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
 		
-		foodproduction1: { title: 'Food Production Level 1 (+10%)', cost: { science: 100, food: 500}, bonuses: { production: { food: 1.10 }} },
-		foodproduction2: { title: 'Food Production Level 2 (+15%)', cost: { science: 200, food: 1000}, bonuses: { production: { food: 1.15 }} },
-		foodproduction3: { title: 'Food Production Level 3 (+20%)', cost: { science: 2000, food: 10000}, bonuses: { production: { food: 1.20 }} },
+		foodproduction1: { title: 'Food Production Level 1 (+10%)',researchRequired: false, research: "", type: "production",  cost: { science: 100, food: 500}, bonuses: { production: { food: 1.10 }} },
+		foodproduction2: { title: 'Food Production Level 2 (+15%)',researchRequired: true, research: "foodproduction1", type: "production",  cost: { science: 200, food: 1000}, bonuses: { production: { food: 1.15 }} },
+		foodproduction3: { title: 'Food Production Level 3 (+20%)',researchRequired: true, research: "foodproduction2", type: "production",  cost: { science: 2000, food: 10000}, bonuses: { production: { food: 1.20 }} },
 		
-		woodcutting1: { title: 'Woodcutting Level 1 (+10%)', cost: { science: 100, wood: 500}, bonuses: { production: { wood: 1.10 }} },
-		woodcutting2: { title: 'Woodcutting Level 2 (+15%)', cost: { science: 200, wood: 1000}, bonuses: { production: { wood: 1.15 }} },
-		woodcutting3: { title: 'Woodcutting Level 3 (+20%)', cost: { science: 2000, wood: 10000}, bonuses: { production: { wood: 1.20 }} },
+		woodcutting1: { title: 'Woodcutting Level 1 (+10%)',researchRequired: false, research: "", type: "production",  cost: { science: 100, wood: 500}, bonuses: { production: { wood: 1.10 }} },
+		woodcutting2: { title: 'Woodcutting Level 2 (+15%)',researchRequired: true, research: "woodcutting1", type: "production",  cost: { science: 200, wood: 1000}, bonuses: { production: { wood: 1.15 }} },
+		woodcutting3: { title: 'Woodcutting Level 3 (+20%)',researchRequired: true, research: "woodcutting2", type: "production",  cost: { science: 2000, wood: 10000}, bonuses: { production: { wood: 1.20 }} },
 		
-		stonecutting1: { title: 'Stonecutting Level 1 (+10%)', cost: { science: 100, stone: 500}, bonuses: { production: { stone: 1.10 }} },
-		stonecutting2: { title: 'Stonecutting Level 2 (+15%)', cost: { science: 200, stone: 1000}, bonuses: { production: { stone: 1.15 }} },
-		stonecutting3: { title: 'Stonecutting Level 3 (+20%)', cost: { science: 2000, stone: 10000}, bonuses: { production: { stone: 1.20 }} },
+		stonecutting1: { title: 'Stonecutting Level 1 (+10%)', researchRequired: false, research: "", type: "production", cost: { science: 100, stone: 500}, bonuses: { production: { stone: 1.10 }} },
+		stonecutting2: { title: 'Stonecutting Level 2 (+15%)',researchRequired: true, research: "stonecutting1", type: "production",  cost: { science: 200, stone: 1000}, bonuses: { production: { stone: 1.15 }} },
+		stonecutting3: { title: 'Stonecutting Level 3 (+20%)',researchRequired: true, research: "stonecutting2", type: "production",  cost: { science: 2000, stone: 10000}, bonuses: { production: { stone: 1.20 }} },
 		
-		ironmining1: { title: 'Iron Mining Level 1 (+10%)', cost: { science: 100, ironore: 500}, bonuses: { production: { ironore: 1.10 }} },
-		ironmining2: { title: 'Iron Mining Level 2 (+15%)', cost: { science: 200, ironore: 1000}, bonuses: { production: { ironore: 1.15 }} },
-		ironmining3: { title: 'Iron Mining Level 3 (+20%)', cost: { science: 2000, ironore: 10000}, bonuses: { production: { ironore: 1.20 }} },
+		ironmining1: { title: 'Iron Mining Level 1 (+10%)', researchRequired: false, research: "", type: "production", cost: { science: 100, ironore: 500}, bonuses: { production: { ironore: 1.10 }} },
+		ironmining2: { title: 'Iron Mining Level 2 (+15%)',researchRequired: true, research: "ironmining1", type: "production",  cost: { science: 200, ironore: 1000}, bonuses: { production: { ironore: 1.15 }} },
+		ironmining3: { title: 'Iron Mining Level 3 (+20%)',researchRequired: true, research: "ironmining2", type: "production",  cost: { science: 2000, ironore: 10000}, bonuses: { production: { ironore: 1.20 }} },
 		
-		ironrefining1: { title: 'Iron Refining Level 1 (+10%)', cost: { science: 100, iron: 500}, bonuses: { production: { iron: 1.10 }} },
-		ironrefining2: { title: 'Iron Refining Level 2 (+15%)', cost: { science: 200, iron: 1000}, bonuses: { production: { iron: 1.15 }} },
-		ironrefining3: { title: 'Iron Refining Level 3 (+20%)', cost: { science: 2000, iron: 10000}, bonuses: { production: { iron: 1.20 }} },
+		ironrefining1: { title: 'Iron Refining Level 1 (+10%)',researchRequired: true, research: "ironsmelting", type: "production",  cost: { science: 100, iron: 500}, bonuses: { production: { iron: 1.10 }} },
+		ironrefining2: { title: 'Iron Refining Level 2 (+15%)',researchRequired: true, research: "ironrefining1", type: "production",  cost: { science: 200, iron: 1000}, bonuses: { production: { iron: 1.15 }} },
+		ironrefining3: { title: 'Iron Refining Level 3 (+20%)',researchRequired: true, research: "ironrefining2", type: "production",  cost: { science: 2000, iron: 10000}, bonuses: { production: { iron: 1.20 }} },
 		
-		goldmining1: { title: 'Gold Mining Level 1 (+10%)', cost: { science: 100, goldore: 500}, bonuses: { production: { goldore: 1.10 }} },
-		goldmining2: { title: 'Gold Mining Level 2 (+15%)', cost: { science: 200, goldore: 1000}, bonuses: { production: { goldore: 1.15 }} },
-		goldmining3: { title: 'Gold Mining Level 3 (+20%)', cost: { science: 2000, goldore: 10000}, bonuses: { production: { goldore: 1.20 }} },
+		goldmining1: { title: 'Gold Mining Level 1 (+10%)',researchRequired: true, research: "goldmining", type: "production",  cost: { science: 100, goldore: 500}, bonuses: { production: { goldore: 1.10 }} },
+		goldmining2: { title: 'Gold Mining Level 2 (+15%)',researchRequired: true, research: "goldmining1", type: "production",  cost: { science: 200, goldore: 1000}, bonuses: { production: { goldore: 1.15 }} },
+		goldmining3: { title: 'Gold Mining Level 3 (+20%)',researchRequired: true, research: "goldmining2", type: "production",  cost: { science: 2000, goldore: 10000}, bonuses: { production: { goldore: 1.20 }} },
 		
-		goldrefining1: { title: 'Gold Refining Level 1 (+10%)', cost: { science: 100, gold: 500}, bonuses: { production: { gold: 1.10 }} },
-		goldrefining2: { title: 'Gold Refining Level 2 (+15%)', cost: { science: 200, gold: 1000}, bonuses: { production: { gold: 1.15 }} },
-		goldrefining3: { title: 'Gold Refining Level 3 (+20%)', cost: { science: 2000, gold: 10000}, bonuses: { production: { gold: 1.20 }} },
+		goldrefining1: { title: 'Gold Refining Level 1 (+10%)',researchRequired: true, research: "goldsmelting", type: "production",  cost: { science: 100, gold: 500}, bonuses: { production: { gold: 1.10 }} },
+		goldrefining2: { title: 'Gold Refining Level 2 (+15%)',researchRequired: true, research: "goldrefining1", type: "production",  cost: { science: 200, gold: 1000}, bonuses: { production: { gold: 1.15 }} },
+		goldrefining3: { title: 'Gold Refining Level 3 (+20%)',researchRequired: true, research: "goldrefining2", type: "production",  cost: { science: 2000, gold: 10000}, bonuses: { production: { gold: 1.20 }} },
 		
-		charcoal1: { title: 'Charcoal Kiln Level 1 (+10%)', cost: { science: 100, charcoal: 500}, bonuses: { production: { charcoal: 1.10 }} },
-		charcoal2: { title: 'Charcoal Kiln Level 2 (+15%)', cost: { science: 200, charcoal: 1000}, bonuses: { production: { charcoal: 1.15 }} },
-		charcoal3: { title: 'Charcoal Kiln Level 3 (+20%)', cost: { science: 2000, charcoal: 10000}, bonuses: { production: { charcoal: 1.20 }} },
+		charcoal1: { title: 'Charcoal Kiln Level 1 (+10%)',researchRequired: true, research: "charcoalsmelting", type: "production",  cost: { science: 100, charcoal: 500}, bonuses: { production: { charcoal: 1.10 }} },
+		charcoal2: { title: 'Charcoal Kiln Level 2 (+15%)',researchRequired: true, research: "charcoal1", type: "production",  cost: { science: 200, charcoal: 1000}, bonuses: { production: { charcoal: 1.15 }} },
+		charcoal3: { title: 'Charcoal Kiln Level 3 (+20%)',researchRequired: true, research: "charcoal2", type: "production",  cost: { science: 2000, charcoal: 10000}, bonuses: { production: { charcoal: 1.20 }} },
 		
-		tooling1: { title: 'Toolery Level 1 (+10%)', cost: { science: 100, tools: 500}, bonuses: { production: { tools: 1.10 }} },
-		tooling2: { title: 'Toolery Level 2 (+15%)', cost: { science: 200, tools: 1000}, bonuses: { production: { tools: 1.15 }} },
-		tooling3: { title: 'Toolery Level 3 (+20%)', cost: { science: 2000, tools: 10000}, bonuses: { production: { tools: 1.20 }} },
+		tooling1: { title: 'Toolery Level 1 (+10%)',researchRequired: true, research: "toolmaking", type: "production",  cost: { science: 100, tools: 500}, bonuses: { production: { tools: 1.10 }} },
+		tooling2: { title: 'Toolery Level 2 (+15%)',researchRequired: true, research: "tooling1", type: "production",  cost: { science: 200, tools: 1000}, bonuses: { production: { tools: 1.15 }} },
+		tooling3: { title: 'Toolery Level 3 (+20%)',researchRequired: true, research: "tooling2", type: "production",  cost: { science: 2000, tools: 10000}, bonuses: { production: { tools: 1.20 }} },
 		
-		researching1: { title: 'Research Level 1 (+10%)', cost: { science: 100, wood: 500, stone: 500, tools: 500}, bonuses: { production: { science: 1.10 }} },
-		researching2: { title: 'Research Level 2 (+15%)', cost: { science: 200, wood: 1000, stone: 1000, tools: 1000}, bonuses: { production: { science: 1.15 }} },
-		researching3: { title: 'Research Level 3 (+20%)', cost: { science: 2000, wood: 10000, stone: 10000, tools: 10000}, bonuses: { production: { science: 1.20 }} },
+		researching1: { title: 'Research Level 1 (+10%)',researchRequired: true, research: "scientificresearch", type: "production",  cost: { science: 100, wood: 500, stone: 500, tools: 500}, bonuses: { production: { science: 1.10 }} },
+		researching2: { title: 'Research Level 2 (+15%)',researchRequired: true, research: "researching1", type: "production",  cost: { science: 200, wood: 1000, stone: 1000, tools: 1000}, bonuses: { production: { science: 1.15 }} },
+		researching3: { title: 'Research Level 3 (+20%)',researchRequired: true, research: "researching2", type: "production",  cost: { science: 2000, wood: 10000, stone: 10000, tools: 10000}, bonuses: { production: { science: 1.20 }} },
 		
-		charcoalsmelting: { title: 'Unlock Charcoal Kiln', cost: { wood: 100, stone: 100}, bonuses: {} },
-		ironsmelting: { title: 'Unlock Iron Forging', cost: { ironore: 50, stone: 100, charcoal: 50}, bonuses: {} },
-		toolmaking: { title: 'Unlock Tool Making', cost: { iron: 50, charcoal: 100}, bonuses: {} },
-		scientificresearch: { title: 'Unlock Scientific Research', cost: { iron: 50, charcoal: 100}, bonuses: {} },
-		goldmining: { title: 'Unlock Gold Mining', cost: { iron: 50, charcoal: 100, tools: 100}, bonuses: {} },
-		goldsmelting: { title: 'Unlock Gold Forging', cost: { charcoal: 100, goldore: 100, tools: 100}, bonuses: {} },
-		coinminting: { title: 'Unlock Coin Minting', cost: { gold: 100, tools: 100}, bonuses: {} },
-		marketplace: { title: 'Unlock Marketplace', cost: { coins: 1000, stone: 500}, bonuses: {} },
-		milling: { title: 'Unlock Mill', cost: { iron: 500, food: 1000, wood: 1000, coins: 500}, bonuses: {} },
+		charcoalsmelting: { title: 'Unlock Charcoal Kiln',researchRequired: false, research: "", type: "unlock",  cost: { wood: 100, stone: 100}, bonuses: {} },
+		ironsmelting: { title: 'Unlock Iron Forging', researchRequired: true, research: "charcoalsmelting", type: "unlock", cost: { ironore: 50, stone: 100, charcoal: 50}, bonuses: {} },
+		toolmaking: { title: 'Unlock Tool Making', researchRequired: true, research: "ironsmelting", type: "unlock", cost: { iron: 50, charcoal: 100}, bonuses: {} },
+		scientificresearch: { title: 'Unlock Scientific Research', researchRequired: true, research: "toolmaking", type: "unlock", cost: { iron: 50, charcoal: 100}, bonuses: {} },
+		goldmining: { title: 'Unlock Gold Mining', researchRequired: true, research: "toolmaking", type: "unlock", cost: { iron: 50, charcoal: 100, tools: 100}, bonuses: {} },
+		goldsmelting: { title: 'Unlock Gold Forging', researchRequired: true, research: "goldmining", type: "unlock", cost: { charcoal: 100, goldore: 100, tools: 100}, bonuses: {} },
+		coinminting: { title: 'Unlock Coin Minting', researchRequired: true, research: "goldsmelting", type: "unlock", cost: { gold: 100, tools: 100}, bonuses: {} },
+		//marketplace: { title: 'Unlock Marketplace', researchRequired: true, research: "coinminting", type: "unlock", cost: { coins: 1000, stone: 500}, bonuses: {} },
+		milling: { title: 'Unlock Mill', researchRequired: true, research: "buildinglevel2", type: "unlock", cost: { iron: 500, food: 1000, wood: 1000, coins: 500}, bonuses: {} },
 		
 
 
-		buildinglevel2: { title: 'Unlock Level 2 Buildings', cost: { iron: 1000, gold: 1000, tools: 1000, coins: 1000}, bonuses: {} },
+		buildinglevel2: { title: 'Unlock Level 2 Buildings', researchRequired: false, research: "", type: "unlock", cost: { iron: 1000, gold: 1000, tools: 1000, coins: 1000}, bonuses: {} },
 		
 	};
 
@@ -384,11 +384,13 @@ var Game = function() {
 			addResource('tools', 10000);*/
 
 
+			//Data.research["marketplace"] = 1;
 			recalculateBonuses();
 		}
 
 		generateMarketplaceList();
 		generateBuildings();
+		generateResearchList();
 
 		$('.resourceListRow').hide();
 
@@ -904,6 +906,40 @@ var Game = function() {
 				}
 			}
 		});
+	}
+
+	function generateResearchList() {
+
+		//generate a list of buildings, separated by function
+		var researchList = {
+			unlock: [],
+			global: [],
+			production: []
+		};
+
+		for (var i = Object.keys(Research).length - 1; i >= 0; i--) {
+			var resName = Object.keys(Research)[i];
+			console.log(resName);
+			console.log(Research[resName]);
+			researchList[Research[resName].type].push(resName);
+		};
+
+		
+
+		for (var i = Object.keys(researchList).length - 1; i >= 0; i--) {
+			for (var j = researchList[Object.keys(researchList)[i]].length - 1; j >= 0; j--) {
+				var research = researchList[Object.keys(researchList)[i]][j];
+				var researchObj = Research[research];
+				researchObj["handle"] = research;
+
+				var tmpl = $.templates("#research-button");
+				var templateData = researchObj;
+				var html = tmpl.render(templateData);
+				$('.research-button-container .category-'+researchObj.type).append(html);
+				console.log(html);
+			};
+
+		};
 	}
 
 	function loadResearchFromSave() {
