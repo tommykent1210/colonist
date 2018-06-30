@@ -3,11 +3,13 @@
 		"version":"0.1.3",
 		"date": "30th June 2018",
 		"added": [
-			"A Marketplace where you can buy and sell items you've unlocked"
+			"A Marketplace where you can buy and sell items you've unlocked",
+			"Added a confirmation step before restarting the game"
 		],
-		"changed": [],
+		"changed": [
+		],
 		"fixed": [
-			"Fixed colonist cap not being updated"
+			"Fixed colonist cap not being updated",
 		],
 		"removed": []
 				

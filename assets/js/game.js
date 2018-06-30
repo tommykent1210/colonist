@@ -6,8 +6,26 @@ $( document ).ready(function() {
     //  hide all researchables
     $('.research-hidden').hide();
 
+    const swalBad = swal.mixin({
+		confirmButtonClass: 'btn btn-danger btn-lrpadding',
+		cancelButtonClass: 'btn  btn-lrpadding',
+		buttonsStyling: false,
+	})
+
     $('.reset').on('click', function() {
-    	gameInstance.resetGame();
+    	swalBad({
+			title: 'Are you sure?',
+			text: "You won't be able to recover your save game later!",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, restart!',
+			cancelButtonText: 'No, cancel!',
+			reverseButtons: false
+		}).then((result) => {
+		  if (result.value) {
+		    gameInstance.resetGame();
+		  }
+		});
     });
 
     // get any action button
@@ -129,7 +147,11 @@ $( document ).ready(function() {
 		//console.log(items);
 
 	});
+
 });
+
+
+	
 
 
 var Game = function() {
@@ -1158,7 +1180,7 @@ var Game = function() {
 			doBirthImmigration();
 			updateCapacity();
 
-			if(ticks % 20 == 0) {
+			if(ticks % 120 == 0) {
 				saveGame();
 			}
 

@@ -102,6 +102,11 @@ font-family: 'Cutive Mono', monospace;
 	display: inline-block;
 }
 
+.btn-lrpadding {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
 .changelog-version {
     font-size: 1.3em;
     font-weight: bold;
