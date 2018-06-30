@@ -144,7 +144,7 @@ var Game = function() {
 	var MarketplaceBuyPercentage = 1.1;
 	var MarketplaceSellPercentage = 0.9;
 
-	var version = 'v0.1.2 ';
+	var version = 'v0.1.3 ';
 
 	var Bonuses, BaseBonuses = {};
 
