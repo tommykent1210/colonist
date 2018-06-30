@@ -7,9 +7,11 @@
 			"Added a confirmation step before restarting the game"
 		],
 		"changed": [
+			"Save interval is now 2 minutes"
 		],
 		"fixed": [
 			"Fixed colonist cap not being updated",
+			"A bug that prevented research progression"
 		],
 		"removed": []
 				

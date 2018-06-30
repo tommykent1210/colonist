@@ -47,7 +47,7 @@
 
   <script id="research-button" type="text/x-jsrender">
   {{if researchRequired}}
-  <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="{{:handle}}" data-task="goldmining"><span class="research-description"></span></button>
+  <button class="btn btn-primary btn-fullwidth research research-hidden" data-research="{{:research}}" data-task="{{:handle}}"><span class="research-description"></span></button>
   {{else}}
   <button class="btn btn-primary btn-fullwidth research" data-task="{{:handle}}"><span class="research-description"></span></button>
   {{/if}}
@@ -508,6 +508,8 @@
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.90/jsrender.min.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.24.4/sweetalert2.all.min.js"></script>
     <script src="./assets/js/game.js"></script>
+
   </body>
   </html>
