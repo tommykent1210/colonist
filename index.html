@@ -16,15 +16,11 @@
 
 
   <script id="marketplace-template" type="text/x-jsrender">
-    <div class="row marketplace-row">
+    <div class="row marketplace-row resource-{{:resourceHandle}}">
       <div class="col-md-3">{{:resourceTitle}}</div> 
       <div class="col-md-9"> 
-        <button class="btn btn-primary" data-item="{{:resourceHandle}}" data-amount="1" data-action="buy">+1</button> 
-        <button class="btn btn-primary" data-item="{{:resourceHandle}}" data-amount="10" data-action="buy">+10</button> 
-        <button class="btn btn-primary" data-item="{{:resourceHandle}}" data-amount="100" data-action="buy">+100</button> 
-        <button class="btn btn-danger" data-item="{{:resourceHandle}}" data-amount="1" data-action="sell">-1</button> 
-        <button class="btn btn-danger" data-item="{{:resourceHandle}}" data-amount="10" data-action="sell">-10</button> 
-        <button class="btn btn-danger" data-item="{{:resourceHandle}}" data-amount="100" data-action="sell">-100</button> 
+        <button class="btn btn-primary marketplace-button buy" data-item="{{:resourceHandle}}" data-action="buy">Buy for <span class="marketplace-buy-cost" data-item="{{:resourceHandle}}"></span></button> 
+        <button class="btn btn-danger marketplace-button sell" data-item="{{:resourceHandle}}" data-action="sell">Sell for <span class="marketplace-sell-cost" data-item="{{:resourceHandle}}"></span></button> 
       </div> 
     </div>
   </script>
@@ -477,14 +473,19 @@
 
                   <div class="marketplace-body container">
                     <div class="row marketplace-row">
-                      <div class="form-inline">
-                        
-                        <label class="" for="marketplace-amount">You can use the marketplace to buy and sell resources</label>
-                        <label class="" for="marketplace-amount">Enter an amount:</label>
-                        <div class="input-group mb-2 mr-sm-2">
-                          <input type="text" class="form-control" id="marketplace-amount" placeholder="1000">
-                        </div>
+                      <div class="col-md-12">
+                        <p>You can use the marketplace to buy and sell resources</p>
+                        <p class="bold">Buy/Sell Amount: 
+                          <button class="btn btn-primary marketplace-quantity" data-quantity="1" data-action="buy">1</button> 
 
+                          <button class="btn btn-primary disabled marketplace-quantity" data-quantity="10" data-action="buy">10</button> 
+
+                          <button class="btn btn-primary disabled marketplace-quantity" data-quantity="100" data-action="buy">100</button> 
+                          <button class="btn btn-primary disabled marketplace-quantity" data-quantity="1000" data-action="buy">1000</button> 
+
+                          Available Coins: <span class="resource coins">0</span>
+                        </p>
+                        <hr>
                       </div>
                     </div>
                     

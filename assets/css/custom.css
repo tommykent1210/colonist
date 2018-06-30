@@ -121,3 +121,7 @@ font-family: 'Cutive Mono', monospace;
 .changelog-list {
 	text-align: justify;
 }
+
+.bold {
+	font-weight: bold;
+}

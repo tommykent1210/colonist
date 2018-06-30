@@ -42,6 +42,19 @@ $( document ).ready(function() {
     	}
     });
 
+    $('.marketplace-quantity').on('click', function() {
+    	gameInstance.setMarketplaceQuantity($(this).data('quantity'));
+    	$('.marketplace-quantity').addClass('disabled');
+    	$(this).removeClass('disabled');
+    });
+
+    $('.marketplace-button').on('click', function() {
+    	var action = $(this).data('action');
+    	var resource = $(this).data('item');
+    	console.log("clicked marketplace button"+action+resource);
+    	gameInstance.marketplaceBuySell(resource, action);
+    })
+
     $('body').tooltip({
     	selector: '[rel=tooltip]'
     });
@@ -127,6 +140,9 @@ var Game = function() {
 	var Debug = true;
 	var GameStarted = false;
 	var ticks = 0;
+	var MarketplaceBuyQuantity = 1;
+	var MarketplaceBuyPercentage = 1.1;
+	var MarketplaceSellPercentage = 0.9;
 
 	var version = 'v0.1.2 ';
 
@@ -338,14 +354,14 @@ var Game = function() {
 				resources: {},
 				production: {},
 				research: {},
-				colonists: 12,
+				colonists: 10,
 				productivity: 1.0,
 				colonistCapacity: 10,
 				foodConsumptionRate: 0.2,
 				requiredColonists: 0,
 				fertilityRate: 0.1,
 				deathRate: 0.001,
-				immigrationRate: 0.10,
+				immigrationRate: 0.20,
 				lastSave: Date.now(),
 			}
 
@@ -468,7 +484,7 @@ var Game = function() {
 	function addBuilding(building, amount) {
 		Data.buildings[building] += amount;
 		// if its a house, update capacity!
-		if(Buildings[building].type == "house") {
+		if(Buildings[building].type == "housing") {
 			updateCapacity();
 		}
 
@@ -491,7 +507,7 @@ var Game = function() {
 			var buildingName = Object.keys(Data.buildings)[i];
 			var count =	Data.buildings[buildingName];
 
-			if(Buildings[buildingName].type == "house") {
+			if(Buildings[buildingName].type == "housing") {
 				Data.colonistCapacity += Buildings[buildingName].capacity * count;
 			}
 		};
@@ -636,6 +652,7 @@ var Game = function() {
 			};
 
 		}
+
 
 		$('span.data.productivity').text((Data.productivity * 100).toFixed(1));
 		$('span.data.requiredWorkers').text((Data.requiredColonists).toFixed(0));
@@ -1041,6 +1058,69 @@ var Game = function() {
 		};
 	}
 
+	function setMarketplaceQuantity(value) {
+		MarketplaceBuyQuantity = value;
+		console.log(value);
+	}
+
+	function marketplaceBuySell(res, action) {
+		console.log(action);
+		console.log(res);
+		if(Resources[res].market == true) {
+			if(action == "buy") {
+				// we are buying
+				var buyCost = MarketplaceBuyQuantity * Resources[res].baseValue * MarketplaceBuyPercentage;
+				if(buyCost <= Data.resources["coins"]) {
+					Data.resources["coins"] -= buyCost;
+					Data.resources[res] += MarketplaceBuyQuantity;
+
+					addMessage('[Marketplace] Bought '+ MarketplaceBuyQuantity +' '+res);
+				}
+			} else if (action == "sell") {
+				//we are selling
+				var sellValue = MarketplaceBuyQuantity * Resources[res].baseValue * MarketplaceSellPercentage;
+				if(Data.resources[res] >= MarketplaceBuyQuantity) {
+					Data.resources["coins"] += sellValue;
+					Data.resources[res] -= MarketplaceBuyQuantity;
+					addMessage('[Marketplace] Sold '+ MarketplaceBuyQuantity +' '+res);
+				}
+
+				unlockResource("coins");
+			
+			}
+		}
+	}
+
+	function updateMarketplaceQuantitiesAndAvailability() {
+		for (var i = Object.keys(Resources).length - 1; i >= 0; i--) {
+			var res = Object.keys(Resources)[i];
+			if(ResourcesUnlocked[res] == 1) {
+				$('.marketplace-row.resource-'+res).show();
+			} else {
+
+				$('.marketplace-row.resource-'+res).hide();
+			}
+
+			if(Resources[res].market == true) {
+				// update amounts
+				$('.marketplace-buy-cost[data-item="'+res+'"]').text(numberFormat(MarketplaceBuyQuantity * Resources[res].baseValue * MarketplaceBuyPercentage, 1)+" coins");
+				$('.marketplace-sell-cost[data-item="'+res+'"]').text(numberFormat(MarketplaceBuyQuantity * Resources[res].baseValue * MarketplaceSellPercentage, 1)+" coins");
+
+
+				if(Data.resources[res] >= MarketplaceBuyQuantity) {
+					$('.marketplace-button.sell[data-item="'+res+'"]').removeClass('disabled').prop('disabled', false);
+				} else {
+					$('.marketplace-button.sell[data-item="'+res+'"]').addClass('disabled').prop('disabled', true);
+				}
+
+				if(Data.resources["coins"] >= Resources[res].baseValue * MarketplaceBuyPercentage * MarketplaceBuyQuantity) {
+					$('.marketplace-button.buy[data-item="'+res+'"]').removeClass('disabled').prop('disabled', false);
+				} else {
+					$('.marketplace-button.buy[data-item="'+res+'"]').addClass('disabled').prop('disabled', true);
+				}
+			}
+		};
+	}
 
 
 	function addMessage(message) {
@@ -1076,6 +1156,7 @@ var Game = function() {
 			doProduction();
 			doDeath();
 			doBirthImmigration();
+			updateCapacity();
 
 			if(ticks % 20 == 0) {
 				saveGame();
@@ -1098,6 +1179,7 @@ var Game = function() {
 			updateResearchLabels();
 			toggleResearchButtons();
 			updateResearchedBuildingsAndItems();
+			updateMarketplaceQuantitiesAndAvailability();
 		}
 		
 	}
@@ -1211,7 +1293,9 @@ var Game = function() {
 		update: update,
 		saveGame: saveGame,
 		resetGame: resetGame,
-		getVersion: getVersion
+		getVersion: getVersion,
+		setMarketplaceQuantity: setMarketplaceQuantity,
+		marketplaceBuySell: marketplaceBuySell
 	}
 
 }
