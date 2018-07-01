@@ -191,7 +191,7 @@ var Game = function() {
 		lab: { type: "science", title: "Science Lab", description: "Progress your colony!", researchRequired: true, research: "scientificresearch", cost: {wood: 150, stone: 100, tools: 20}, capacity: 0, workers: 3, generates: {tools: -0.15, science: 0.5} },
 		goldmine: { type: "production", title: "Gold Mine", description: "Mine gold ore from gold rich veins", researchRequired: true, research: "goldmining", cost: {wood: 150, stone: 100, tools: 20}, capacity: 0, workers: 4, generates: {tools: -0.1, goldore: 0.2} },
 		goldforge: { type: "refining", title: "Gold Forge", description: "Refines gold ore into gold ingots", researchRequired: true, research: "goldsmelting", cost: {wood: 350, stone: 200, tools: 50}, capacity: 0, workers: 3, generates: {tools: -0.15, goldore: -0.2, gold: 0.1} },
-		mint: { type: "manufacturing", title: "Mint", description: "Convert gold to coins", researchRequired: true, research: "minting", cost: {wood: 350, stone: 200, tools: 50, gold: 20}, capacity: 0, workers: 3, generates: {gold: -0.1, coins: 0.2} },
+		mint: { type: "manufacturing", title: "Mint", description: "Convert gold to coins", researchRequired: true, research: "coinminting", cost: {wood: 350, stone: 200, tools: 50, gold: 20}, capacity: 0, workers: 3, generates: {gold: -0.1, coins: 0.2} },
 
 		// level 2 buildings
 		mill: { type: "production", title: "Mill", description: "Process food to increase yield", researchRequired: true, research: "milling", cost: {wood: 650, stone: 500, tools: 50}, capacity: 0, workers: 4, generates: {tools: -0.25, food: 2} },
