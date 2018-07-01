@@ -184,7 +184,7 @@ var Game = function() {
 		house: { type: "housing", title: "Small House", description: "Provides housing for 6 colonists", researchRequired: false, research: "", cost: {wood: 20, stone: 25}, capacity: 6, workers: 0, generates: {} },
 		woodshack: { type: "production", title: "Wood Shack", description: "Lumberjacks generate wood here", researchRequired: false, research: "", cost: {wood: 5, stone: 15}, capacity: 0, workers: 2, generates: {wood: 2} },
 		farm: { type: "production", title: "Farm", description: "Farms provide basic food", researchRequired: false, research: "", cost: {wood: 20, stone: 10}, capacity: 0, workers: 4, generates: {food: 2.5} },
-		ironmine: { type: "production", title: "Iron Mine", description: "Mines provide ores and stone", researchRequired: false, research: "", cost: {wood: 15, stone: 5}, capacity: 0, workers: 3, generates: {ironore: 0.25, stone: 0.5} },
+		ironmine: { type: "production", title: "Iron Rich Quarry", description: "Quarries provide ores and stone", researchRequired: false, research: "", cost: {wood: 15, stone: 5}, capacity: 0, workers: 3, generates: {ironore: 0.25, stone: 0.5} },
 		charcoalkiln: { type: "refining", title: "Charcoal Kiln", description: "Turns wood to charcoal", researchRequired: true, research: "charcoalsmelting", cost: {wood: 20, stone: 15}, capacity: 0, workers: 2, generates: {wood: -1, charcoal: 0.5} },
 		ironforge: { type: "refining", title: "Iron Forge", description: "Refines iron ore into iron ingots", researchRequired: true, research: "ironsmelting", cost: {wood: 10, stone: 35}, capacity: 0, workers: 3, generates: {ironore: -0.5, charcoal: -0.5, iron: 0.25} },
 		toolery: { type: "manufacturing", title: "Toolery", description: "Turns iron into tools", researchRequired: true, research: "toolmaking", cost: {wood: 150, stone: 50, iron: 20}, capacity: 0, workers: 3, generates: {iron: -0.5, tools: 0.25} },
@@ -195,6 +195,8 @@ var Game = function() {
 
 		// level 2 buildings
 		mill: { type: "production", title: "Mill", description: "Process food to increase yield", researchRequired: true, research: "milling", cost: {wood: 650, stone: 500, tools: 50}, capacity: 0, workers: 4, generates: {tools: -0.25, food: 2} },
+		ironmine2: { type: "production", title: "Iron Shaft Mine", description: "A rich vein of iron can be mined", researchRequired: true, research: "advancedmining", cost: {wood: 350, stone: 500, tools: 50}, capacity: 0, workers: 4, generates: {tools: -0.25, ironore: 0.8, stone: 0.1} },
+		goldmine2: { type: "production", title: "Gold Shaft Mine", description: "A seam of gold glistens in the torchlight", researchRequired: true, research: "advancedmining", cost: {wood: 350, stone: 500, tools: 50}, capacity: 0, workers: 4, generates: {tools: -0.25, ironore: 0.8, stone: 0.1} },
 	};
 
 
@@ -334,6 +336,7 @@ var Game = function() {
 		coinminting: { title: 'Unlock Coin Minting', researchRequired: true, research: "goldsmelting", type: "unlock", cost: { gold: 100, tools: 100}, bonuses: {} },
 		marketplace: { title: 'Unlock Marketplace', researchRequired: true, research: "coinminting", type: "unlock", cost: { coins: 1000, stone: 500}, bonuses: {} },
 		milling: { title: 'Unlock Mill', researchRequired: true, research: "buildinglevel2", type: "unlock", cost: { iron: 500, food: 1000, wood: 1000, coins: 500}, bonuses: {} },
+		advancedmining: { title: 'Unlock Advanced Mines', researchRequired: true, research: "buildinglevel2", type: "unlock", cost: { iron: 500, gold: 500, wood: 1000, coins: 500}, bonuses: {} },
 		
 
 

@@ -16,7 +16,8 @@
 		],
 		"fixed": [
 			"Fixed colonist cap not being updated",
-			"A bug that prevented research progression"
+			"A bug that prevented research progression",
+			"A bug that prevented unlocking the marketplace"
 		],
 		"removed": []
 				
