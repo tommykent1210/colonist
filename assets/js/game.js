@@ -204,56 +204,78 @@ var Game = function() {
 		"science": {
 			title: "Science",
 			market: false,
+			researchRequired: false,
+			research: "",
 			baseValue: 0
 		}, 
 		"wood": {
 			title: "Wood",
 			market: true,
+			researchRequired: false,
+			research: "",
 			baseValue: 10
 		}, 
 		"stone": {
 			title: "Stone",
 			market: true,
+			researchRequired: false,
+			research: "",
 			baseValue: 10
 		},
 		"food": {
 			title: "Food",
 			market: true,
+			researchRequired: false,
+			research: "",
 			baseValue: 20
 		}, 
 		"ironore": {
 			title: "Iron Ore",
 			market: true,
+			researchRequired: false,
+			research: "",
 			baseValue: 50
 		},
 		"iron": {
 			title: "Iron",
 			market: true,
+			researchRequired: false,
+			research: "",
 			baseValue: 100
 		},
 		"tools": {
 			title: "Tools",
 			market: true,
+			researchRequired: false,
+			research: "",
 			baseValue: 150
 		},
 		"charcoal": {
 			title: "Charcoal",
 			market: true,
+			researchRequired: false,
+			research: "",
 			baseValue: 10
 		},
 		"goldore": {
 			title: "Gold Ore",
 			market: true,
+			researchRequired: false,
+			research: "",
 			baseValue: 150
 		},
 		"gold": {
 			title: "Gold",
 			market: true,
+			researchRequired: false,
+			research: "",
 			baseValue: 300
 		},
 		"coins": {
 			title: "Coins",
 			market: false,
+			researchRequired: false,
+			research: "",
 			baseValue: 0
 		}
 	};
@@ -436,6 +458,8 @@ var Game = function() {
 		generateBuildings();
 		generateResearchList();
 
+		
+		generateResourceList();
 		$('.resourceListRow').hide();
 
 		if(newgame == true) {
@@ -653,6 +677,23 @@ var Game = function() {
 		}
 	}
 
+	function generateResourceList() {
+		
+		for (var i = Object.keys(Resources).length - 1; i >= 0; i--) {
+			var resource = Object.keys(Resources)[i];
+			var resourceObj = Resources[resource];
+			resourceObj["handle"] = resource;
+
+			var tmpl = $.templates("#resource-list");
+			var templateData = resourceObj;
+			var html = tmpl.render(templateData);
+			$('.resourceProduction').append(html);
+				
+		};
+
+
+	}
+
 	function unlockResource(resource, notify) {
 		ResourcesUnlocked[resource] = 1;
 		$('.resourceListRow[data-resource="'+ resource +'"]').show();
@@ -716,7 +757,10 @@ var Game = function() {
 				var templateData = buildingObj;
 				var html = tmpl.render(templateData);
 				$('.building-purchase-container .category-'+buildingObj.type).append(html);
-				console.log(html);
+				
+				var tmpl2 = $.templates("#building-quantities");
+				var html2 = tmpl2.render(templateData);
+				$('.building-list').append(html2);
 			};
 
 		};

@@ -11,6 +11,7 @@
 		"changed": [
 			"Save interval is now 2 minutes",
 			"Slightly increased food yeilds"
+			"Streamlined code generation for adding new resources"
 		],
 		"fixed": [
 			"Fixed colonist cap not being updated",

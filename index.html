@@ -53,6 +53,30 @@
   <button class="btn btn-primary btn-fullwidth research" data-task="{{:handle}}"><span class="research-description"></span></button>
   {{/if}}
   </script>
+
+  <script id="building-quantities" type="text/x-jsrender">
+  {{if researchRequired}}
+  <tr class="research-hidden" data-research="{{:research}}">
+  {{else}}
+  <tr>
+  {{/if}}
+    <th scope="row">{{:title}}:</th>
+    <td><span class="data building" data-building="{{:handle}}">0</span></td>
+  </tr>
+  </script>
+
+  <script id="resource-list" type="text/x-jsrender">
+  {{if researchRequired}}
+  <tr class="resourceListRow research-hidden" data-research="{{:research}}" data-resource="{{:handle}}">
+  {{else}}
+  <tr class="resourceListRow" data-resource="{{:handle}}">
+  {{/if}}
+  
+    <th scope="row"><img class="resource-icon" src="assets/img/resources/{{:handle}}.png"/> {{:title}}:</th>
+    <td><span class="resource {{:handle}}">0</span></td>
+    <td><span class="production {{:handle}}">0.0/t</span></td>
+  </tr>
+  </script>
 </head>
 
 <body>
@@ -153,65 +177,6 @@
                     <td></td>
                   </tr>
 
-                  <tr class="resourceListRow" data-resource="food">
-                    <th scope="row"><img class="resource-icon" src="assets/img/resources/food.png"/> Food:</th>
-                    <td><span class="resource food">0</span></td>
-                    <td><span class="production food">0.0/t</span></td>
-                  </tr>
-                  <tr class="resourceListRow" data-resource="wood">
-                    <th scope="row"><img class="resource-icon" src="assets/img/resources/wood.png"/> Wood:</th>
-                    <td><span class="resource wood">0</span></td>
-                    <td><span class="production wood">0.0/t</span></td>
-                  </tr>
-                  <tr class="resourceListRow" data-resource="stone">
-                    <th scope="row"><img class="resource-icon" src="assets/img/resources/stone.png"/> Stone:</th>
-                    <td><span class="resource stone">0</span></td>
-                    <td><span class="production stone">0.0/t</span></td>
-                  </tr>
-
-                  <tr class="resourceListRow research-hidden" data-research="charcoalsmelting" data-resource="charcoal">
-                    <th scope="row"><img class="resource-icon" src="assets/img/resources/charcoal.png"/> Charcoal:</th>
-                    <td><span class="resource charcoal">0</span></td>
-                    <td><span class="production charcoal">0.0/t</span></td>
-                  </tr>
-
-                  <tr class="resourceListRow" data-resource="ironore">
-                    <th scope="row"><img class="resource-icon" src="assets/img/resources/ironore.png"/> Iron Ore:</th>
-                    <td><span class="resource ironore">0</span></td>
-                    <td><span class="production ironore">0.0/t</span></td>
-                  </tr>
-                  <tr class="resourceListRow research-hidden" data-research="ironsmelting" data-resource="iron">
-                    <th scope="row"><img class="resource-icon" src="assets/img/resources/iron.png"/> Iron:</th>
-                    <td><span class="resource iron">0</span></td>
-                    <td><span class="production iron">0.0/t</span></td>
-                  </tr>
-                  <tr class="resourceListRow research-hidden" data-research="goldmining" data-resource="goldore">
-                    <th scope="row"><img class="resource-icon" src="assets/img/resources/goldore.png"/> Gold Ore:</th>
-                    <td><span class="resource goldore">0</span></td>
-                    <td><span class="production goldore">0.0/t</span></td>
-                  </tr>
-                  <tr class="resourceListRow research-hidden" data-research="goldsmelting" data-resource="gold">
-                    <th scope="row"><img class="resource-icon" src="assets/img/resources/gold.png"/> Gold:</th>
-                    <td><span class="resource gold">0</span></td>
-                    <td><span class="production gold">0.0/t</span></td>
-                  </tr>
-                  <tr class="resourceListRow" data-resource="tools">
-                    <th scope="row"><img class="resource-icon" src="assets/img/resources/tools.png"/> Tools:</th>
-                    <td><span class="resource tools">0</span></td>
-                    <td><span class="production tools">0.0/t</span></td>
-                  </tr>
-
-                  <tr class="resourceListRow" data-resource="science">
-                    <th scope="row"><img class="resource-icon" src="assets/img/resources/science.png"/> Science:</th>
-                    <td><span class="resource science">0</span></td>
-                    <td><span class="production science">0.0/t</span></td>
-                  </tr>
-
-                  <tr class="resourceListRow research-hidden" data-research="minting" data-resource="coins">
-                    <th scope="row"><img class="resource-icon" src="assets/img/resources/coins.png"/> Coins:</th>
-                    <td><span class="resource coins">0</span></td>
-                    <td><span class="production coins">0.0/t</span></td>
-                  </tr>
                   
 
                 </tbody>
@@ -227,56 +192,8 @@
             </div>
             <div class="body">
               <table class="table table-borderless table-buildings">
-                <tbody>
-                  <tr>
-                    <th scope="row">House:</th>
-                    <td><span class="data building" data-building="house">0</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Wood Shack:</th>
-                    <td><span class="data building" data-building="woodshack">0</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Farm:</th>
-                    <td><span class="data building" data-building="farm">0</span></td>
-                  </tr>
-                  <tr class="research-hidden" data-research="milling">
-                    <th scope="row">Mill:</th>
-                    <td><span class="data building" data-building="mill">0</span></td>
-                  </tr>
-                  <tr class="research-hidden" data-research="charcoalsmelting">
-                    <th scope="row">Charcoal Kiln:</th>
-                    <td><span class="data building" data-building="charcoalkiln">0</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Iron Mine:</th>
-                    <td><span class="data building" data-building="ironmine">0</span></td>
-                  </tr>
-                  <tr class="research-hidden" data-research="ironsmelting">
-                    <th scope="row">Iron Forge:</th>
-                    <td><span class="data building" data-building="ironforge">0</span></td>
-                  </tr>
-                  <tr class="research-hidden" data-research="goldmining">
-                    <th scope="row">Gold Mine:</th>
-                    <td><span class="data building" data-building="goldmine">0</span></td>
-                  </tr>
-                  <tr class="research-hidden" data-research="goldsmelting">
-                    <th scope="row">Gold Forge:</th>
-                    <td><span class="data building" data-building="goldforge">0</span></td>
-                  </tr>
-                  <tr class="research-hidden" data-research="coinminting">
-                    <th scope="row">Mint:</th>
-                    <td><span class="data building" data-building="mint">0</span></td>
-                  </tr>
-                  <tr class="research-hidden" data-research="toolmaking">
-                    <th scope="row">Toolery:</th>
-                    <td><span class="data building" data-building="toolery">0</span></td>
-                  </tr>
-                  <tr class="research-hidden" data-research="scientificresearch">
-                    <th scope="row">Lab:</th>
-                    <td><span class="data building" data-building="lab">0</span></td>
-                  </tr>
-
+                <tbody class="building-list">
+                  
 
                 </tbody>
               </table>
