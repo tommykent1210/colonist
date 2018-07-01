@@ -5,7 +5,8 @@
 		"added": [
 			"A Marketplace where you can buy and sell items you've unlocked",
 			"Added a confirmation step before restarting the game",
-			"Number of workers required per building is now visible"
+			"Number of workers required per building is now visible",
+			"You can now save the game manually so you don't have to wait 2 minutes"
 		],
 		"changed": [
 			"Save interval is now 2 minutes"

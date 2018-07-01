@@ -28,6 +28,12 @@ $( document ).ready(function() {
 		});
     });
 
+    $('.reset').on('click', function() {
+    	
+		gameInstance.saveGame();
+	
+    });
+
     // get any action button
     $('.action').on('click', function() {
     	console.log('clicked');
