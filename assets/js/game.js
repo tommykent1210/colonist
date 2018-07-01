@@ -89,7 +89,7 @@ $( document ).ready(function() {
     });
 
     jQuery.getJSON( "assets/changelogs/changelog.json", function( data ) {
-    	//console.log(data);
+    	console.log(data);
     	var items = [];
     	$.each(data, function(index, item) {
     		//console.log(item)
@@ -1007,8 +1007,8 @@ var Game = function() {
 
 		for (var i = Object.keys(Research).length - 1; i >= 0; i--) {
 			var resName = Object.keys(Research)[i];
-			console.log(resName);
-			console.log(Research[resName]);
+			//console.log(resName);
+			//console.log(Research[resName]);
 			researchList[Research[resName].type].push(resName);
 		};
 
@@ -1024,7 +1024,7 @@ var Game = function() {
 				var templateData = researchObj;
 				var html = tmpl.render(templateData);
 				$('.research-button-container .category-'+researchObj.type).append(html);
-				console.log(html);
+				//console.log(html);
 			};
 
 		};
