@@ -4,7 +4,8 @@
 		"date": "30th June 2018",
 		"added": [
 			"A Marketplace where you can buy and sell items you've unlocked",
-			"Added a confirmation step before restarting the game"
+			"Added a confirmation step before restarting the game",
+			"Number of workers required per building is now visible"
 		],
 		"changed": [
 			"Save interval is now 2 minutes"

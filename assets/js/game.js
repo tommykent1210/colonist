@@ -739,6 +739,7 @@ var Game = function() {
 				};
 
 				$('span.cost[data-building='+building+']').html("Cost: " +costs.join(', '));
+				$('span.workers[data-building='+building+']').html('Workers: <img class="resource-icon" src="assets/img/resources/worker.png"  data-toggle="tooltip" data-placement="top" title="Workers"/> x' + Buildings[building].workers);
 			};
 
 		}

@@ -75,7 +75,7 @@ body {
 }
 
 
-span.cost, span.production-text {
+span.cost, span.production-text, span.workers {
 	text-align: center;
 	display: block;
 }
