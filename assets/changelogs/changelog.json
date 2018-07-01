@@ -6,11 +6,12 @@
 			"A Marketplace where you can buy and sell items you've unlocked",
 			"Added a confirmation step before restarting the game",
 			"Number of workers required per building is now visible",
-			"You can now save the game manually so you don't have to wait 2 minutes"
+			"You can now save the game manually so you don't have to wait 2 minutes",
+			"Added advanced mines that generate more ore (level 2 buildings)"
 		],
 		"changed": [
 			"Save interval is now 2 minutes",
-			"Slightly increased food yeilds"
+			"Slightly increased food yeilds",
 			"Streamlined code generation for adding new resources"
 		],
 		"fixed": [

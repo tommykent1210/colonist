@@ -332,7 +332,7 @@ var Game = function() {
 		goldmining: { title: 'Unlock Gold Mining', researchRequired: true, research: "toolmaking", type: "unlock", cost: { iron: 50, charcoal: 100, tools: 100}, bonuses: {} },
 		goldsmelting: { title: 'Unlock Gold Forging', researchRequired: true, research: "goldmining", type: "unlock", cost: { charcoal: 100, goldore: 100, tools: 100}, bonuses: {} },
 		coinminting: { title: 'Unlock Coin Minting', researchRequired: true, research: "goldsmelting", type: "unlock", cost: { gold: 100, tools: 100}, bonuses: {} },
-		//marketplace: { title: 'Unlock Marketplace', researchRequired: true, research: "coinminting", type: "unlock", cost: { coins: 1000, stone: 500}, bonuses: {} },
+		marketplace: { title: 'Unlock Marketplace', researchRequired: true, research: "coinminting", type: "unlock", cost: { coins: 1000, stone: 500}, bonuses: {} },
 		milling: { title: 'Unlock Mill', researchRequired: true, research: "buildinglevel2", type: "unlock", cost: { iron: 500, food: 1000, wood: 1000, coins: 500}, bonuses: {} },
 		
 
