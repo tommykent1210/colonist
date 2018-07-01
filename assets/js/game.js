@@ -461,7 +461,7 @@ var Game = function() {
 		generateBuildings();
 		generateResearchList();
 
-		
+
 		generateResourceList();
 		$('.resourceListRow').hide();
 
@@ -506,7 +506,7 @@ var Game = function() {
 				Data.resources[tempResourceName] -= (purchaseCost[tempResourceName] * (currentNumber + 1) * amount) 
 			};
 			Data.buildings[building] += amount;
-			addMessage('[Building] Success! Purchased ' + building + '!');
+			addMessage('[Building] Success! Purchased ' + Buildings[building].title + '!');
 		} else {
 			// tell the user no
 			addMessage('[Building] Fail! Not enough resources!');
