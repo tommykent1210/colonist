@@ -284,7 +284,7 @@ var Game = function() {
 
 	var Research = {
 		increasedcapacity: { title: 'Increased Colonist Capacity Level 1 (+10%)',researchRequired: false, research: "", type: "global",  cost: { science: 100, food: 250}, bonuses: { globalbonus: { colonistCapacity: 1.1 }} },
-		increasedcapacity2: { title: 'Increased Colonist Capacity Level 2 (+10%)',researchRequired: true, research: "increasedcapacity1", type: "global",  cost: { science: 300, food: 500}, bonuses: { globalbonus: { colonistCapacity: 1.1 }} },
+		increasedcapacity2: { title: 'Increased Colonist Capacity Level 2 (+10%)',researchRequired: true, research: "increasedcapacity", type: "global",  cost: { science: 300, food: 500}, bonuses: { globalbonus: { colonistCapacity: 1.1 }} },
 		increasedcapacity3: { title: 'Increased Colonist Capacity Level 3 (+10%)',researchRequired: true, research: "increasedcapacity2", type: "global",  cost: { science: 750, food: 1000}, bonuses: { globalbonus: { colonistCapacity: 1.1 }} },
 		
 		reducedfood: { title: 'Reduced Food Cost Level 1 (-10%)',researchRequired: false, research: "", type: "global",  cost: { science: 100, food: 250}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
