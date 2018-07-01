@@ -735,7 +735,7 @@ var Game = function() {
 				var costString = [];
 				for (var j = Object.keys(purchaseCost).length - 1; j >= 0; j--) {
 					var tempResourceName = Object.keys(purchaseCost)[j];
-					costs.push('<img class="resource-icon" src="assets/img/resources/'+ tempResourceName + '.png"  data-toggle="tooltip" data-placement="top" title="'+ tempResourceName +'"/> x' + purchaseCost[tempResourceName] * (currentNumber + 1));
+					costs.push('<img class="resource-icon" src="assets/img/resources/'+ tempResourceName + '.png"  data-toggle="tooltip" data-placement="top" title="'+ Resources[tempResourceName].title +'"/> x' + purchaseCost[tempResourceName] * (currentNumber + 1));
 				};
 
 				$('span.cost[data-building='+building+']').html("Cost: " +costs.join(', '));
@@ -757,7 +757,7 @@ var Game = function() {
 				var costString = [];
 				for (var j = Object.keys(production).length - 1; j >= 0; j--) {
 					var tempResourceName = Object.keys(production)[j];
-					prod.push('<img class="resource-icon" src="assets/img/resources/'+ tempResourceName + '.png"  data-toggle="tooltip" data-placement="top" title="'+ tempResourceName +'"/> ' + production[tempResourceName] + '/t');
+					prod.push('<img class="resource-icon" src="assets/img/resources/'+ tempResourceName + '.png"  data-toggle="tooltip" data-placement="top" title="'+ Resources[tempResourceName].title +'"/> ' + production[tempResourceName] + '/t');
 				};
 
 				if(prod.length > 0) {
