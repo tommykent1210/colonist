@@ -288,7 +288,7 @@ var Game = function() {
 		increasedcapacity3: { title: 'Increased Colonist Capacity Level 3 (+10%)',researchRequired: true, research: "increasedcapacity2", type: "global",  cost: { science: 750, food: 1000}, bonuses: { globalbonus: { colonistCapacity: 1.1 }} },
 		
 		reducedfood: { title: 'Reduced Food Cost Level 1 (-10%)',researchRequired: false, research: "", type: "global",  cost: { science: 100, food: 250}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
-		reducedfood2: { title: 'Reduced Food Cost Level 2 (-10%)',researchRequired: true, research: "reducedfood1", type: "global",  cost: { science: 300, food: 500}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
+		reducedfood2: { title: 'Reduced Food Cost Level 2 (-10%)',researchRequired: true, research: "reducedfood", type: "global",  cost: { science: 300, food: 500}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
 		reducedfood3: { title: 'Reduced Food Cost Level 3 (-10%)',researchRequired: true, research: "reducedfood2", type: "global",  cost: { science: 750, food: 1000}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
 		
 		foodproduction1: { title: 'Food Production Level 1 (+10%)',researchRequired: false, research: "", type: "production",  cost: { science: 100, food: 500}, bonuses: { production: { food: 1.10 }} },
