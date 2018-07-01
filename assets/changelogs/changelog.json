@@ -9,7 +9,8 @@
 			"You can now save the game manually so you don't have to wait 2 minutes"
 		],
 		"changed": [
-			"Save interval is now 2 minutes"
+			"Save interval is now 2 minutes",
+			"Slightly increased food yeilds"
 		],
 		"fixed": [
 			"Fixed colonist cap not being updated",
