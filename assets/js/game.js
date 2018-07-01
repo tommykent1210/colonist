@@ -28,7 +28,7 @@ $( document ).ready(function() {
 		});
     });
 
-    $('.reset').on('click', function() {
+    $('.save').on('click', function() {
     	
 		gameInstance.saveGame();
 	
