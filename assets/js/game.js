@@ -172,7 +172,7 @@ var Game = function() {
 	var MarketplaceBuyPercentage = 1.1;
 	var MarketplaceSellPercentage = 0.9;
 
-	var version = 'v0.1.3 ';
+	var version = 'v0.1.4 ';
 
 	var Bonuses, BaseBonuses = {};
 
@@ -283,6 +283,10 @@ var Game = function() {
 	};
 
 	var Research = {
+		increasedcapacity: { title: 'Increased Colonist Capacity Level 1 (+10%)',researchRequired: false, research: "", type: "global",  cost: { science: 100, food: 250}, bonuses: { globalbonus: { colonistCapacity: 1.1 }} },
+		increasedcapacity2: { title: 'Increased Colonist Capacity Level 2 (+10%)',researchRequired: true, research: "increasedcapacity1", type: "global",  cost: { science: 300, food: 500}, bonuses: { globalbonus: { colonistCapacity: 1.1 }} },
+		increasedcapacity3: { title: 'Increased Colonist Capacity Level 3 (+10%)',researchRequired: true, research: "increasedcapacity2", type: "global",  cost: { science: 750, food: 1000}, bonuses: { globalbonus: { colonistCapacity: 1.1 }} },
+		
 		reducedfood: { title: 'Reduced Food Cost Level 1 (-10%)',researchRequired: false, research: "", type: "global",  cost: { science: 100, food: 250}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
 		reducedfood2: { title: 'Reduced Food Cost Level 2 (-10%)',researchRequired: true, research: "reducedfood1", type: "global",  cost: { science: 300, food: 500}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
 		reducedfood3: { title: 'Reduced Food Cost Level 3 (-10%)',researchRequired: true, research: "reducedfood2", type: "global",  cost: { science: 750, food: 1000}, bonuses: { globalbonus: { foodConsumptionRate: 0.9 }} },
@@ -441,22 +445,13 @@ var Game = function() {
 			addResource('stone', 50);
 			addResource('food', 100);
 
-			/*addResource('food', 10000);
-			addResource('iron', 10000);
-			addResource('gold', 10000);
-			addResource('coins', 10000);
-			addResource('wood', 10000);
-			addResource('stone', 10000);
-			addResource('ironore', 10000);
-			addResource('goldore', 10000);
-			addResource('charcoal', 10000);
-			addResource('tools', 10000);*/
 
 
 			//Data.research["marketplace"] = 1;
-			recalculateBonuses();
+			
 		}
 
+		recalculateBonuses();
 		generateMarketplaceList();
 		generateBuildings();
 		generateResearchList();
@@ -569,7 +564,7 @@ var Game = function() {
 
 
 
-		$('.data.colonists').text(Data.colonists+'/'+(Data.colonistCapacity * Bonuses.globalbonus.colonistCapacity));
+		$('.data.colonists').text(Data.colonists+'/'+( Math.floor(Data.colonistCapacity * Bonuses.globalbonus.colonistCapacity).toFixed(0)));
 	}
 
 	function updateProductivity() {
@@ -729,7 +724,7 @@ var Game = function() {
 		$('span.data.productivity').text((Data.productivity * 100).toFixed(1));
 		$('span.data.requiredWorkers').text((Data.requiredColonists).toFixed(0));
 		$('span.data.fertility').text((Data.fertilityRate * 100).toFixed(1));
-		$('span.data.colonists').text((Data.colonists).toFixed(0)+'/'+ (Data.colonistCapacity * Bonuses.globalbonus.colonistCapacity));
+		$('span.data.colonists').text((Data.colonists).toFixed(0)+'/'+ (Math.floor(Data.colonistCapacity * Bonuses.globalbonus.colonistCapacity).toFixed(0) ));
 	}
 
 	function generateBuildings() {
@@ -1040,9 +1035,11 @@ var Game = function() {
 			var researchName = Object.keys(Data.research)[i];
 			if(Data.research[researchName] == 1) {
 				$('.research[data-task="'+researchName+'"]').prop('disabled', true).addClass('disabled').removeClass('btn-primary').addClass('btn-success');
+
 			}
 		};
 		
+		recalculateBonuses();
 	}
 
 	function recalculateBonuses() {
