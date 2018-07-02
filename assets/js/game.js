@@ -451,6 +451,8 @@ var Game = function() {
 			
 		}
 
+
+
 		recalculateBonuses();
 		generateMarketplaceList();
 		generateBuildings();
