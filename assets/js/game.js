@@ -410,53 +410,47 @@ var Game = function() {
 
 		Bonuses = BaseBonuses;
 
-		if(Object.keys(Data).length === 0 && Data.constructor === Object) {
-			//Object is empty!
-			Data = {
-				version: version,
-				buildings: {},
-				resources: {},
-				production: {},
-				research: {},
-				colonists: 10,
-				productivity: 1.0,
-				colonistCapacity: 10,
-				foodConsumptionRate: 0.2,
-				requiredColonists: 0,
-				fertilityRate: 0.1,
-				deathRate: 0.001,
-				immigrationRate: 0.20,
-				lastSave: Date.now(),
-			}
-
-			for (var i = Object.keys(Resources).length - 1; i >= 0; i--) {
-				Data.resources[Object.keys(Resources)[i]] = 0;
-				Data.production[Object.keys(Resources)[i]] = 0;
-				BaseBonuses.production[Object.keys(Resources)[i]] = 1;
-				ResourcesUnlocked[Object.keys(Resources)[i]] = 0;
-			};
-
-
-			for (var i = Object.keys(Buildings).length - 1; i >= 0; i--) {
-				Data.buildings[Object.keys(Buildings)[i]] = 0;
-			};
-
-			for (var i = Object.keys(Research).length - 1; i >= 0; i--) {
-				Data.research[Object.keys(Research)[i]] = 0;
-			};
-
-			addBuilding('house', 3);
-			addBuilding('farm', 2);
-
-			addResource('wood', 50);
-			addResource('stone', 50);
-			addResource('food', 100);
-
-
-
-			//Data.research["marketplace"] = 1;
-			
+	
+		//Object is empty!
+		Data = {
+			version: version,
+			buildings: {},
+			resources: {},
+			production: {},
+			research: {},
+			colonists: 10,
+			productivity: 1.0,
+			colonistCapacity: 10,
+			foodConsumptionRate: 0.2,
+			requiredColonists: 0,
+			fertilityRate: 0.1,
+			deathRate: 0.001,
+			immigrationRate: 0.20,
+			lastSave: Date.now(),
 		}
+
+		for (var i = Object.keys(Resources).length - 1; i >= 0; i--) {
+			Data.resources[Object.keys(Resources)[i]] = 0;
+			Data.production[Object.keys(Resources)[i]] = 0;
+			BaseBonuses.production[Object.keys(Resources)[i]] = 1;
+			ResourcesUnlocked[Object.keys(Resources)[i]] = 0;
+		};
+
+
+		for (var i = Object.keys(Buildings).length - 1; i >= 0; i--) {
+			Data.buildings[Object.keys(Buildings)[i]] = 0;
+		};
+
+		for (var i = Object.keys(Research).length - 1; i >= 0; i--) {
+			Data.research[Object.keys(Research)[i]] = 0;
+		};
+
+		addBuilding('house', 3);
+		addBuilding('farm', 2);
+
+		addResource('wood', 50);
+		addResource('stone', 50);
+		addResource('food', 100);
 
 
 
@@ -464,6 +458,7 @@ var Game = function() {
 		generateMarketplaceList();
 		generateBuildings();
 		generateResearchList();
+		updateBuildingCosts();
 
 
 		generateResourceList();
