@@ -507,6 +507,9 @@ var Game = function() {
 				var tempResourceName = Object.keys(purchaseCost)[i];
 				Data.resources[tempResourceName] -= (purchaseCost[tempResourceName] * (currentNumber + 1) * amount) 
 			};
+			if(Data.buildings[building] == undefined) {
+				Data.buildings[building] = 0;
+			}
 			Data.buildings[building] += amount;
 			addMessage('[Building] Success! Purchased ' + Buildings[building].title + '!');
 		} else {
