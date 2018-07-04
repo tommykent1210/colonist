@@ -1293,6 +1293,13 @@ var Game = function() {
 
 				loadResearchFromSave();
 
+				for (var i = Object.keys(Buildings).length - 1; i >= 0; i--) {
+					var building = Object.keys(Buildings)[i];
+					if(Data.buildings[building] == undefined) {
+						Data.buildings[building] = 0;
+					}
+				};
+
 				return true;
 			} else {
 				addMessage("[Game] Found a previous save from another version, unable to load");
