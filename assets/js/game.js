@@ -197,6 +197,9 @@ var Game = function() {
 		mill: { type: "production", title: "Mill", description: "Process food to increase yield", researchRequired: true, research: "milling", cost: {wood: 650, stone: 500, tools: 50}, capacity: 0, workers: 4, generates: {tools: -0.25, food: 2} },
 		ironmine2: { type: "production", title: "Iron Shaft Mine", description: "A rich vein of iron can be mined", researchRequired: true, research: "advancedmining", cost: {wood: 350, stone: 500, tools: 50}, capacity: 0, workers: 4, generates: {tools: -0.25, ironore: 0.8, stone: 0.1} },
 		goldmine2: { type: "production", title: "Gold Shaft Mine", description: "A seam of gold glistens in the torchlight", researchRequired: true, research: "advancedmining", cost: {wood: 350, stone: 500, tools: 50}, capacity: 0, workers: 4, generates: {tools: -0.25, ironore: 0.8, stone: 0.1} },
+		2mediumhouse: { type: "housing", title: "Medium House", description: "Provides housing for 10 colonists", researchRequired: true, research: "mediumhousing", cost: {wood: 200, stone: 250}, capacity: 10, workers: 0, generates: {} },
+		3largehouse: { type: "housing", title: "Large House", description: "Provides housing for 16 colonists", researchRequired: true, research: "largehousing", cost: {wood: 400, stone: 500}, capacity: 16, workers: 0, generates: {} },
+		
 	};
 
 
@@ -346,6 +349,10 @@ var Game = function() {
 
 		buildinglevel2: { title: 'Unlock Level 2 Buildings', researchRequired: false, research: "", type: "unlock", cost: { iron: 1000, gold: 1000, tools: 1000, coins: 1000}, bonuses: {} },
 		
+		mediumhousing: { title: 'Unlock Medium Houses', researchRequired: true, research: "buildinglevel2", type: "unlock", cost: { wood: 1000, iron: 1000, gold: 1000, tools: 100, coins: 1000}, bonuses: {} },
+		largehousing: { title: 'Unlock Large Houses', researchRequired: true, research: "mediumhousing", type: "unlock", cost: { wood: 2000, iron: 2000, gold: 2000, tools: 200, coins: 2000}, bonuses: {} },
+		
+
 	};
 
 	var ResourcesUnlocked = {};
