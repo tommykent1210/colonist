@@ -490,6 +490,9 @@ var Game = function() {
 		
 		var purchaseCost = Buildings[building].cost;
 		var currentNumber = Data.buildings[building];
+		if(currentNumber == undefined) {
+			currentNumber = 0;
+		}
 		var ableToPurchase = true;
 		
 		for (var i = Object.keys(purchaseCost).length - 1; i >= 0; i--) {
@@ -783,6 +786,9 @@ var Game = function() {
 				var building = Object.keys(Buildings)[i];
 				var purchaseCost = Buildings[building].cost;
 				var currentNumber = Data.buildings[building];
+				if(currentNumber == undefined) {
+					currentNumber = 0;
+				}
 				var costs = [];
 				var costString = [];
 				for (var j = Object.keys(purchaseCost).length - 1; j >= 0; j--) {
